@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PlaceHolder.API\PlaceHolder.API.csproj" />
+		<ProjectReference Include="..\PlaceHolder.Application.Logic\PlaceHolder.Application.Logic.csproj" />
+		<ProjectReference Include="..\PlaceHolder.Application.Services\PlaceHolder.Application.Services.csproj" />
+		<ProjectReference Include="..\PlaceHolder.DependencyInjection\PlaceHolder.DependencyInjection.csproj" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(ConfigurationName) == Debug">
+		<Exec Command="copy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(TargetDir)..\..\..\..\Build\Debug&quot;" />
+	</Target>
+
+</Project>
