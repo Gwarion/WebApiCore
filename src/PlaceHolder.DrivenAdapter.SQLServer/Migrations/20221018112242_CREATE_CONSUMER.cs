@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     public partial class CREATE_CONSUMER : Migration
@@ -11,11 +13,11 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                 name: "Consumers",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: true),
-                    ModificationDate = table.Column<DateTime>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

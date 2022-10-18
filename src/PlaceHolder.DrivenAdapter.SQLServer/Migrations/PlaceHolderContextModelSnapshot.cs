@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 
+#nullable disable
+
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     [DbContext(typeof(PlaceHolderContext))]
@@ -15,9 +17,10 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.30")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.Consumer", b =>
                 {

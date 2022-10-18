@@ -7,19 +7,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 
+#nullable disable
+
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     [DbContext(typeof(PlaceHolderContext))]
-    [Migration("20221017132209_CREATE_CONSUMER")]
+    [Migration("20221018112242_CREATE_CONSUMER")]
     partial class CREATE_CONSUMER
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.30")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.Consumer", b =>
                 {
