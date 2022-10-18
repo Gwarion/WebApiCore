@@ -40,9 +40,9 @@ namespace PlaceHolder.API.Controllers.Consumers
         [HttpGet("{consumerId}", Name = "GetOne")]
         [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetOne([FromRoute] string guid)
+        public async Task<IActionResult> GetOne([FromRoute] string consumerId)
         {
-            var result = await _consumerService.GetOneByIdAsync(guid);
+            var result = await _consumerService.GetOneByIdAsync(consumerId);
             return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
         }
     }

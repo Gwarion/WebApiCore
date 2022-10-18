@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A08387F9-F32B-4485-92CF-F5A23E8844B5}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,13 +28,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.Domain.Model", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Layer", "Application Layer", "{CB118F4B-6544-4299-8850-C0AD8B9BF911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceHolder.Application.Logic", "src\PlaceHolder.Application.Logic\PlaceHolder.Application.Logic.csproj", "{4524E6B8-E985-44F3-B8A7-202DBC7D431D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.Application.Logic", "src\PlaceHolder.Application.Logic\PlaceHolder.Application.Logic.csproj", "{4524E6B8-E985-44F3-B8A7-202DBC7D431D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceHolder.Application.Services", "src\PlaceHolder.Application.Services\PlaceHolder.Application.Services.csproj", "{1AD61DF3-5C9A-4D54-AF77-FC2DABCFE29F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.Application.Services", "src\PlaceHolder.Application.Services\PlaceHolder.Application.Services.csproj", "{1AD61DF3-5C9A-4D54-AF77-FC2DABCFE29F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driving Adapters", "Driving Adapters", "{493C2CCD-0BAC-40D9-8982-7D88014D6D7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceHolder.DrivingAdapter.WebApi", "src\PlaceHolder.DrivingAdapter.WebApi\PlaceHolder.DrivingAdapter.WebApi.csproj", "{4F482835-6723-4D40-BF45-7671D2881D7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.DrivingAdapter.WebApi", "src\PlaceHolder.DrivingAdapter.WebApi\PlaceHolder.DrivingAdapter.WebApi.csproj", "{4F482835-6723-4D40-BF45-7671D2881D7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceHolder.Utils", "src\PlaceHolder.Utils\PlaceHolder.Utils.csproj", "{A370AE01-746A-4F29-9C0F-1B310378566A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,10 @@ Global
 		{4F482835-6723-4D40-BF45-7671D2881D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F482835-6723-4D40-BF45-7671D2881D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F482835-6723-4D40-BF45-7671D2881D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A370AE01-746A-4F29-9C0F-1B310378566A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A370AE01-746A-4F29-9C0F-1B310378566A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A370AE01-746A-4F29-9C0F-1B310378566A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A370AE01-746A-4F29-9C0F-1B310378566A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

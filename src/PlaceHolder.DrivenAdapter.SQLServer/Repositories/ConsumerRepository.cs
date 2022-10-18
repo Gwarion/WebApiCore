@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
+using PlaceHolder.Utils.Exceptions.DomainExceptions;
 using System;
 using System.Threading.Tasks;
 using DbConsumer = PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.Consumer;
@@ -20,6 +21,11 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
         public async Task<Consumer> GetOneByIdAsync(Guid guid)
         {
             var dbConsumer = await _context.Consumers.AsNoTracking().SingleOrDefaultAsync(c => c.Guid == guid);
+
+            if(dbConsumer == null)
+            {
+                throw new NotFoundException($"No consumer with id : {guid}");
+            }
 
             return _mapper.Map<DbConsumer, Consumer>(dbConsumer);
         }

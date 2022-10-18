@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PlaceHolder.API.Middlewares;
 using PlaceHolder.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,8 @@ namespace PlaceHolder.API
                 app.Use((context, next) => next.Invoke());
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
