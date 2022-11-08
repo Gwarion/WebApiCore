@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
@@ -9,7 +9,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<OutputPath>..\..\Build\Debug</OutputPath>
 	</PropertyGroup>
-
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.2.2" />
@@ -22,7 +21,6 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 	  <ProjectReference Include="..\PlaceHolder.Application.Services\PlaceHolder.Application.Services.csproj" />

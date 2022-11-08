@@ -7,27 +7,26 @@ using System.Text;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 {
-
-
-
-
     public class PlaceHolderContextFactory : IDesignTimeDbContextFactory<PlaceHolderContext>
     {
-        public PlaceHolderContextFactory()
-        {
-            // A parameter-less constructor is required by the EF Core CLI tools.
-        }
+        /// <summary>
+        /// A parameter-less constructor is required by the EF Core CLI tools.
+        /// </summary>
+        public PlaceHolderContextFactory() { }
 
         public PlaceHolderContext CreateDbContext(string[] args)
         {
             var connectionString = DatabaseOptions.ConnectionString;
+
             if (string.IsNullOrEmpty(connectionString))
-                throw new InvalidOperationException("The connection string was not set " +
-                "in the 'EFCORETOOLSDB' environment variable.");
+            {
+                throw new InvalidOperationException("Connection string was not set");
+            }
 
             var options = new DbContextOptionsBuilder<PlaceHolderContext>()
                .UseSqlServer(connectionString)
                .Options;
+
             return new PlaceHolderContext(options);
         }
     }

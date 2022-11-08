@@ -14,7 +14,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
     public class AdapterInstaller : IAdapterInstaller
     {
         private static readonly int _maxRetryCount = 4;
-        private static readonly TimeSpan _maxRetryDelay = new TimeSpan(0, 0, 5);
+        private static readonly TimeSpan _maxRetryDelay = new(0, 0, 5);
 
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
@@ -25,12 +25,11 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
             services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
         }
 
-        private void CongfigureCommandDbContext(IServiceCollection services)
+        private static void CongfigureCommandDbContext(IServiceCollection services)
         {
             services.AddDbContextPool<PlaceHolderContext>((provider, options) =>
             {
-                /* cf https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
-                 * https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency */
+                //cf https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                 options.UseSqlServer(
                     DatabaseOptions.ConnectionString,
                     sqlOptions =>

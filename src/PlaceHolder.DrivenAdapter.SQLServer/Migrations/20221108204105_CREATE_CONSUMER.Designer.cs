@@ -12,17 +12,18 @@ using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     [DbContext(typeof(PlaceHolderContext))]
-    [Migration("20221018112242_CREATE_CONSUMER")]
-    partial class CREATE_CONSUMER
+    [Migration("20221108204105_CREATE_CONSUMER")]
+    partial class CREATECONSUMER
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.Consumer", b =>
                 {

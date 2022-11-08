@@ -1,16 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using PlaceHolder.API.Middlewares;
+using PlaceHolder.API.Version;
 using PlaceHolder.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PlaceHolder.API
 {
@@ -69,11 +64,10 @@ namespace PlaceHolder.API
                 endpoints.MapControllers();
             });
 
-            app.UseOpenApi()
-                .UseSwaggerUi3(config =>
-                {
-                    config.EnableTryItOut = true;
-                });
+            app.UseOpenApi().UseSwaggerUi3(config =>
+            {
+                config.EnableTryItOut = true;
+            });
         }
     }
 }

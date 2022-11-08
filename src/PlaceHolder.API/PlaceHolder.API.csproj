@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
@@ -23,6 +23,5 @@
 	  <ProjectReference Include="..\PlaceHolder.DependencyInjection\PlaceHolder.DependencyInjection.csproj" />
 	  <ProjectReference Include="..\PlaceHolder.Utils\PlaceHolder.Utils.csproj" />
 	</ItemGroup>
-
 
 </Project>

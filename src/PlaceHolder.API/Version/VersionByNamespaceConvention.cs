@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlaceHolder.API
+namespace PlaceHolder.API.Version
 {
     internal class VersionByNamespaceConvention : IApplicationModelConvention
     {
@@ -18,8 +18,8 @@ namespace PlaceHolder.API
                 if (!hasAttributeRouteModels)
                 {
                     var apiVersion = controller.Attributes.FirstOrDefault(t => t is ApiVersionAttribute) as ApiVersionAttribute;
-                    
-                    if(apiVersion == null)
+
+                    if (apiVersion == null)
                     {
                         throw new ArgumentNullException(nameof(AreaAttribute));
                     }

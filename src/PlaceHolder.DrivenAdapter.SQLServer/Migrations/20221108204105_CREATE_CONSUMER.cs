@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
-    public partial class CREATE_CONSUMER : Migration
+    /// <inheritdoc />
+    public partial class CREATECONSUMER : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -25,6 +27,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                 });
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
