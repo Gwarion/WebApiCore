@@ -1,4 +1,4 @@
-# WebApiCore
+# About this repo
 
 This is a proof of concept for a .NET 6 WebApi using 
 - CQRS with a Mediatr pipeline
