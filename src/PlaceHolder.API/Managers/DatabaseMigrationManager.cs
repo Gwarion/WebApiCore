@@ -1,26 +1,30 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlaceHolder.Application.Services.Ports.EF;
+using PlaceHolder.DependencyInjection;
 using System;
 
-namespace PlaceHolder.API
+namespace PlaceHolder.API.Managers
+
 {
-    public static class WebHostExtensions
+    public static class DatabaseMigrationManager
     {
         public static IHost MigrateDatabase(this IHost host)
         {
             using var scope = host.Services.CreateScope();
             using var dbContext = scope.ServiceProvider.GetRequiredService<IDbContext>();
 
-            try
+            if (Docker.IsStarted())
             {
-                dbContext.Migrate();
+                try
+                {
+                    dbContext.Migrate();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
             return host;
         }
     }

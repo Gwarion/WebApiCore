@@ -2,6 +2,8 @@ version: '3.4'
 
 services:
   placeholder.api:
+    environment:
+        - RUNNING_IN_DOCKER=true
     image: ${DOCKER_REGISTRY-}placeholderapi
     build:
       context: .

@@ -33,7 +33,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
             {
                 //cf https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                 options.UseSqlServer(
-                    DatabaseOptions.DockerDbConnectionString,
+                    DatabaseOptions.GetConnectionString(),
                     sqlOptions =>
                     {
                         sqlOptions.EnableRetryOnFailure(
