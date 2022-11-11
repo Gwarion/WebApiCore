@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using PlaceHolder.Application.Services.Ports.EF;
 using PlaceHolder.DependencyInjection;
 using PlaceHolder.DependencyInjection.Options;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
@@ -23,6 +24,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
             services.AddAutoMapper(GetType().Assembly);
 
             services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
+            services.AddScoped<IDbContext, PlaceHolderContext>();
         }
 
         private static void CongfigureCommandDbContext(IServiceCollection services)
@@ -31,7 +33,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
             {
                 //cf https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                 options.UseSqlServer(
-                    DatabaseOptions.ConnectionString,
+                    DatabaseOptions.DockerDbConnectionString,
                     sqlOptions =>
                     {
                         sqlOptions.EnableRetryOnFailure(

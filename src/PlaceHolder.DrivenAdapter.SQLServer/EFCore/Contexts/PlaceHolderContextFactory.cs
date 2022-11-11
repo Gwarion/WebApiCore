@@ -16,7 +16,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 
         public PlaceHolderContext CreateDbContext(string[] args)
         {
-            var connectionString = DatabaseOptions.ConnectionString;
+            var connectionString = DatabaseOptions.DockerDbConnectionString;
 
             if (string.IsNullOrEmpty(connectionString))
             {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PlaceHolder.Application.Services.Ports.EF;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.AbstractEntities;
 using System;
@@ -10,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 {
-    public class PlaceHolderContext : DbContext
+    public class PlaceHolderContext : DbContext, IDbContext
     {
         public DbSet<Consumer> Consumers { get; set; }
         public PlaceHolderContext(DbContextOptions options) : base(options) { }
 
+        public void Migrate() => this.Database.Migrate();
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlaceHolderContext).Assembly);

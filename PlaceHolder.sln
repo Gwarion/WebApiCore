@@ -36,7 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driving Adapters", "Driving
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.DrivingAdapter.WebApi", "src\PlaceHolder.DrivingAdapter.WebApi\PlaceHolder.DrivingAdapter.WebApi.csproj", "{4F482835-6723-4D40-BF45-7671D2881D7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceHolder.Utils", "src\PlaceHolder.Utils\PlaceHolder.Utils.csproj", "{A370AE01-746A-4F29-9C0F-1B310378566A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.Utils", "src\PlaceHolder.Utils\PlaceHolder.Utils.csproj", "{A370AE01-746A-4F29-9C0F-1B310378566A}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +82,10 @@ Global
 		{A370AE01-746A-4F29-9C0F-1B310378566A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A370AE01-746A-4F29-9C0F-1B310378566A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A370AE01-746A-4F29-9C0F-1B310378566A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
