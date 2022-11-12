@@ -10,11 +10,7 @@ namespace PlaceHolder.API.Controllers.Consumers
     public class ConsumerController : PlaceHolderController
     {
         private readonly IConsumerService _consumerService;
-
-        public ConsumerController(IConsumerService consumerService)
-        {
-            _consumerService = consumerService;
-        }
+        public ConsumerController(IConsumerService consumerService) => _consumerService = consumerService;
 
 
         [HttpPost(Name ="CreateConsumer")]
@@ -40,7 +36,7 @@ namespace PlaceHolder.API.Controllers.Consumers
         [HttpGet("{consumerId}", Name = "GetOne")]
         [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetOne([FromRoute] string consumerId)
+        public async Task<IActionResult> GetOneConsumer([FromRoute] string consumerId)
         {
             var result = await _consumerService.GetOneByIdAsync(consumerId);
             return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };

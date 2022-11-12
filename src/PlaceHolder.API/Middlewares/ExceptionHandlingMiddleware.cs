@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using PlaceHolder.Utils.Exceptions;
 using PlaceHolder.Utils.Exceptions.DomainExceptions;
@@ -29,7 +30,7 @@ namespace PlaceHolder.API.Middlewares
             {
                 await _next(httpContext);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError(message: e.Message);
 
@@ -50,7 +51,7 @@ namespace PlaceHolder.API.Middlewares
         {
             var errorResponse = new ErrorResponse { Success = false };
 
-            switch(exception)
+            switch (exception)
             {
                 case NotFoundException _:
                     errorResponse.StatusCode = HttpStatusCode.NotFound;
@@ -60,7 +61,7 @@ namespace PlaceHolder.API.Middlewares
                 default:
                     errorResponse.StatusCode = HttpStatusCode.InternalServerError;
                     errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;
-                break;
+                    break;
             }
 
             return Task.FromResult(errorResponse);
@@ -76,7 +77,10 @@ namespace PlaceHolder.API.Middlewares
                     errorResponse.StatusCode = HttpStatusCode.NotImplemented;
                     errorResponse.Message = ExceptionMessages.NotImplementedExceptionMessage;
                     break;
-
+                case ValidationException _:
+                    errorResponse.StatusCode = HttpStatusCode.BadRequest;
+                    errorResponse.Message = $"{ExceptionMessages.ValueObjectValidationExceptionMessage} : {exception.Message}";
+                    break;
                 default:
                     errorResponse.StatusCode = HttpStatusCode.InternalServerError;
                     errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;

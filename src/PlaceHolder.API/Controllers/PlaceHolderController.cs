@@ -9,7 +9,5 @@ namespace PlaceHolder.API.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
-    public abstract class PlaceHolderController : ControllerBase
-    {
-    }
+    public abstract class PlaceHolderController : ControllerBase { }
 }

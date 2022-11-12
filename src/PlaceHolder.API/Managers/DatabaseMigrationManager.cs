@@ -13,18 +13,8 @@ namespace PlaceHolder.API.Managers
         {
             using var scope = host.Services.CreateScope();
             using var dbContext = scope.ServiceProvider.GetRequiredService<IDbContext>();
+            dbContext.Migrate();
 
-            if (Docker.IsStarted())
-            {
-                try
-                {
-                    dbContext.Migrate();
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-            }
             return host;
         }
     }

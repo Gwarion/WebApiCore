@@ -14,6 +14,8 @@ namespace PlaceHolder.DependencyInjection.AssemblyUtils
         private static readonly string ApplicationDomainRootNamespace = "placeholder.domain";
         private static readonly string ApplicationCoreRootNamespace = "placeholder.application";
 
+        private static string GetApplicationPath() => AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
+
         public static Assembly[] GetApplicationCoreAssemblies()
         {
             var assembliesPath = GetApplicationCoreAssembliesPath();
@@ -57,7 +59,5 @@ namespace PlaceHolder.DependencyInjection.AssemblyUtils
 
             return res.ToArray();
         }
-
-        private static string GetApplicationPath() => AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
     }
 }

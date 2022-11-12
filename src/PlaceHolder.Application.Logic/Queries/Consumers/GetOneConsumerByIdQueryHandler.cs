@@ -16,7 +16,6 @@ namespace PlaceHolder.Application.Logic.Queries.Consumers
         public override async Task<Consumer> Handle(GetOneConsumerByIdQuery request)
         {
             return await _consumerRepository.GetOneByIdAsync(request.Guid);
-
         }
     }
 }

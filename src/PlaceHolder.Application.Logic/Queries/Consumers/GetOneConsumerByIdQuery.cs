@@ -8,9 +8,6 @@ namespace PlaceHolder.Application.Logic.Queries.Consumers
     {
         public Guid Guid { get; set; }
 
-        public GetOneConsumerByIdQuery(string guid)
-        {
-            Guid = Guid.Parse(guid);
-        }
+        public GetOneConsumerByIdQuery(string guid) => Guid = Guid.Parse(guid);
     }
 }

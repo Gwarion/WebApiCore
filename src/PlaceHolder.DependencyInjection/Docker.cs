@@ -8,9 +8,6 @@ namespace PlaceHolder.DependencyInjection
 {
     public static class Docker
     {
-        public static bool IsStarted()
-        {
-            return Environment.GetEnvironmentVariable("RUNNING_IN_DOCKER") != null;
-        }
+        public static bool IsStarted() => Environment.GetEnvironmentVariable("RUNNING_IN_DOCKER") != null;
     }
 }

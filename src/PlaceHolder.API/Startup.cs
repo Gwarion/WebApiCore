@@ -11,14 +11,14 @@ namespace PlaceHolder.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
+        /// <summary>
+        /// All method named 'Configure____Services' get called through reflection by the runtime
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(option => option.Conventions.Add(new VersionByNamespaceConvention()));
@@ -28,13 +28,12 @@ namespace PlaceHolder.API
                 config.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
-                    document.Info.Title = "Ma première API";
-                    document.Info.Description = "POC d'une web api core en archi hexagonale et DDD";
-                    document.Info.TermsOfService = "None";
+                    document.Info.Title = ".NET Core 6.0 WebApi";
+                    document.Info.Description = "Uses : CQRS (Mediatr pipeline), Hexagonal Architecture and DDD";
                     document.Info.Contact = new NSwag.OpenApiContact
                     {
                         Name = "Geoffrey Warion",
-                        Email = "geoffrey.warion@live.fr"
+                        Email = "geoffrey.warion@live.fr",
                     };
                 };
             });
@@ -42,7 +41,12 @@ namespace PlaceHolder.API
             services.AddApplicationCore().AddAdapters(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Gets called by the runtime
+        /// Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

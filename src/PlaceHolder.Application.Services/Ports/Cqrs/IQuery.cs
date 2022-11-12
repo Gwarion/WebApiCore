@@ -2,7 +2,5 @@
 
 namespace PlaceHolder.Application.Services.Ports.Cqrs
 {
-    public interface IQuery<TResult> : IRequest<TResult>
-    {
-    }
+    public interface IQuery<TResult> : IRequest<TResult> { }
 }
