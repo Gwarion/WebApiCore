@@ -9,9 +9,6 @@ namespace PlaceHolder.API.Middlewares
         public string Message { get; set; }
         public bool Success { get; set; }
 
-        public override string ToString()
-        {
-            return JsonSerializer.Serialize(this);
-        }
+        public override string ToString() => JsonSerializer.Serialize(this);
     }
 }
