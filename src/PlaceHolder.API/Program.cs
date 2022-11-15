@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlaceHolder.API.Managers;
 using PlaceHolder.API.Middlewares;
-using PlaceHolder.API.Version;
 using PlaceHolder.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 /*
 Configure Services
 */
-builder.Services.AddControllers(option => option.Conventions.Add(new VersionByNamespaceConvention()));
+
+//Enable api versionning
+builder.Services.AddApiVersioning(opts =>
+{
+    opts.AssumeDefaultVersionWhenUnspecified = true;
+    opts.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    opts.ReportApiVersions = true;
+});
+
+//Force the current version of the api in the url of each controller routes
+builder.Services.AddVersionedApiExplorer(o =>
+{
+    o.GroupNameFormat = "'v'VVV";
+    o.SubstituteApiVersionInUrl = true;
+});
+
+builder.Services.AddControllers();
 
 builder.Services.AddOpenApiDocument(config =>
 {
