@@ -33,10 +33,9 @@ namespace PlaceHolder.DependencyInjection
 
             //MediatR
             services.AddMediatR(assemblies);
-
-            //FluentValidation
             services.TryAddTransient(typeof(IPipelineBehavior<,>), typeof(MediatrRequestValidationPreProcessor<>));
 
+            //FluentValidation
             FluentValidation.AssemblyScanner
                 .FindValidatorsInAssemblies(assemblies)
                 .ForEach(validator => services.AddScoped(validator.InterfaceType, validator.ValidatorType));

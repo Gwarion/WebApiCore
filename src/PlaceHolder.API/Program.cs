@@ -1,23 +1,72 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlaceHolder.API.Managers;
+using PlaceHolder.API.Middlewares;
+using PlaceHolder.API.Version;
+using PlaceHolder.DependencyInjection;
 
-namespace PlaceHolder.API
+var builder = WebApplication.CreateBuilder(args);
+
+/*
+Configure Services
+*/
+builder.Services.AddControllers(option => option.Conventions.Add(new VersionByNamespaceConvention()));
+
+builder.Services.AddOpenApiDocument(config =>
 {
-    public class Program
+    config.PostProcess = document =>
     {
-        public static void Main(string[] args)
+        document.Info.Version = "v1";
+        document.Info.Title = ".NET Core 6.0 WebApi";
+        document.Info.Description = "Uses : CQRS (Mediatr pipeline), Hexagonal Architecture and DDD";
+        document.Info.Contact = new NSwag.OpenApiContact
         {
-            CreateHostBuilder(args)
-                .Build()
-                .MigrateDatabase()
-                .Run();
-        }
+            Name = "Geoffrey Warion",
+            Email = "geoffrey.warion@live.fr",
+        };
+    };
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
-        }
-    }
+builder.Services.AddApplicationCore();
+builder.Services.AddAdapters(builder.Configuration);
+
+/*
+Build and configure app
+*/
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.Use((context, next) => next.Invoke());
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+app.UseOpenApi().UseSwaggerUi3(config =>
+{
+    config.EnableTryItOut = true;
+});
+
+/*
+Apply DB Migrations
+*/
+app.MigrateDatabase();
+
+/*
+Ready to run
+*/
+app.Run();
