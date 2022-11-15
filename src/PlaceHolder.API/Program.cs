@@ -21,10 +21,10 @@ builder.Services.AddApiVersioning(opts =>
 });
 
 //Force the current version of the api in the url of each controller routes
-builder.Services.AddVersionedApiExplorer(o =>
+builder.Services.AddVersionedApiExplorer(opts =>
 {
-    o.GroupNameFormat = "'v'VVV";
-    o.SubstituteApiVersionInUrl = true;
+    opts.GroupNameFormat = "'v'VVV";
+    opts.SubstituteApiVersionInUrl = true;
 });
 
 builder.Services.AddControllers();
