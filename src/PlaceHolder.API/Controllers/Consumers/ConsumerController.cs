@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PlaceHolder.API.Controllers.Consumers.Dtos;
 using System.Net.Mime;
 using System.Threading.Tasks;
 

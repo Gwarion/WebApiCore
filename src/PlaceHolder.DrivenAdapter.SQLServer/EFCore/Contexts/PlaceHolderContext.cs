@@ -39,5 +39,25 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
+        public async Task<T> ExecuteAsTransaction<T>(Func<Task<T>> transactionalAction)
+        {
+            try
+            {
+                await this.Database.BeginTransactionAsync();
+                var result = await transactionalAction();
+                await this.Database.CommitTransactionAsync();
+
+                return result;
+            }
+            catch
+            {
+                if(this.Database?.CurrentTransaction?.TransactionId != null)
+                {
+                    this.Database.RollbackTransaction();
+                }
+
+                throw;
+            }   
+        }
     }
 }

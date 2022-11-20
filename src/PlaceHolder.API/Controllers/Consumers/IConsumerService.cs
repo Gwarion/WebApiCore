@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using PlaceHolder.API.Controllers.Consumers.Dtos;
 
 namespace PlaceHolder.API.Controllers.Consumers
 {

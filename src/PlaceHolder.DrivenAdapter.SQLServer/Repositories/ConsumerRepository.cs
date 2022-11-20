@@ -20,7 +20,9 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
 
         public async Task<Consumer> GetOneByIdAsync(Guid guid)
         {
-            var dbConsumer = await _context.Consumers.AsNoTracking().SingleOrDefaultAsync(c => c.Guid == guid);
+            var dbConsumer = await _context.Consumers.AsNoTracking()
+                .Include(c => c.Address)
+                .SingleOrDefaultAsync(c => c.Guid == guid);
 
             if(dbConsumer == null)
             {

@@ -33,7 +33,7 @@ namespace PlaceHolder.DependencyInjection
 
             //MediatR
             services.AddMediatR(assemblies);
-            services.TryAddTransient(typeof(IPipelineBehavior<,>), typeof(MediatrRequestValidationPreProcessor<>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(DbTransactionPipelineBehavior<,>));
 
             //FluentValidation
             FluentValidation.AssemblyScanner

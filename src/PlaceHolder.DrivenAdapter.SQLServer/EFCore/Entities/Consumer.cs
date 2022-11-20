@@ -10,6 +10,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Address Address { get; set; }
 
         internal class ConsumerConfiguration : TimeStampedEntityConfiguration<Consumer>
         {
