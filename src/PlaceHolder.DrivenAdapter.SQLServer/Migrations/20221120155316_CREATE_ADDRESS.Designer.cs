@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 
@@ -11,9 +12,10 @@ using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     [DbContext(typeof(PlaceHolderContext))]
-    partial class PlaceHolderContextModelSnapshot : ModelSnapshot
+    [Migration("20221120155316_CREATE_ADDRESS")]
+    partial class CREATE_ADDRESS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

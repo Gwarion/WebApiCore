@@ -20,6 +20,11 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             consumer.FirstName = request.FirstName;
             consumer.LastName = request.LastName;
 
+            consumer.Address.City = request.Address.City;
+            consumer.Address.Street = request.Address.Street;
+            consumer.Address.Country = request.Address.Country;
+            consumer.Address.PostalCode = request.Address.PostalCode;
+
             return await _consumerRepository.UpdateAsync(consumer);
         }
     }

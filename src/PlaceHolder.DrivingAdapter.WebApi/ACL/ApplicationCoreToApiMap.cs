@@ -8,6 +8,8 @@ namespace PlaceHolder.DrivingAdapter.WebApi.ACL
     {
         public ApplicationCoreToApiMap()
         {
+            CreateMap<Address, AddressDto>();
+
             CreateMap<Consumer, ConsumerDto>()
                 .ForMember(destination => destination.Guid, opts => opts.MapFrom(source => source.Guid.ToString()));
         }

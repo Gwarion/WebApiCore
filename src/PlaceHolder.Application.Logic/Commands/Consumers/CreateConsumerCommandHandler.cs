@@ -18,7 +18,8 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             return await _consumerRepository.SaveAsync(new Consumer
             {
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                Address = request.Address
             });
         }
     }
