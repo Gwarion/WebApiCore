@@ -11,6 +11,9 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public Address Address { get; set; }
+        public int AddressId { get; set; }
+
         internal class ConsumerConfiguration : TimeStampedEntityConfiguration<Consumer>
         {
             public override void Configure(EntityTypeBuilder<Consumer> builder)

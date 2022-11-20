@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PlaceHolder.API.Controllers.Consumers
+namespace PlaceHolder.API.Controllers.Consumers.Dtos
 {
     [JsonObject("consumer")]
     public class ConsumerDto
@@ -9,7 +9,7 @@ namespace PlaceHolder.API.Controllers.Consumers
         public string Guid { get; set; }
 
         [JsonProperty("firstName")]
-        public string FirstName{ get; set; }
+        public string FirstName { get; set; }
 
         [JsonProperty("lastName")]
         public string LastName { get; set; }
@@ -19,5 +19,8 @@ namespace PlaceHolder.API.Controllers.Consumers
 
         [JsonProperty("modificationDate")]
         public string ModificationDate { get; set; }
+
+        [JsonProperty("address")]
+        public AddressDto Address { get; set; }
     }
 }

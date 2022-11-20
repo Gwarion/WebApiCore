@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PlaceHolder.API.Controllers.Consumers;
+using PlaceHolder.API.Controllers.Consumers.Dtos;
 using PlaceHolder.Application.Logic.Commands.Consumers;
 using PlaceHolder.Application.Logic.Queries.Consumers;
 using PlaceHolder.Application.Services.Ports.Cqrs;

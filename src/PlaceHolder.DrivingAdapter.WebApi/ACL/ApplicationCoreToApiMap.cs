@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PlaceHolder.API.Controllers.Consumers;
+using PlaceHolder.API.Controllers.Consumers.Dtos;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 
 namespace PlaceHolder.DrivingAdapter.WebApi.ACL

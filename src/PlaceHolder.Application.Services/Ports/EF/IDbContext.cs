@@ -8,6 +8,7 @@ namespace PlaceHolder.Application.Services.Ports.EF
 {
     public interface IDbContext : IDisposable
     {
-        public void Migrate();
+        void Migrate();
+        Task<T> ExecuteAsTransaction<T>(Func<Task<T>> action);
     }
 }
