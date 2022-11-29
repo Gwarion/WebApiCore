@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using PlaceHolder.Utils.Exceptions;
 using PlaceHolder.Utils.Exceptions.DomainExceptions;
+using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace PlaceHolder.API.Middlewares
                 ErrorResponse errorResponse = e switch
                 {
                     DomainException => await HandleDomainExceptionAsync(e),
+                    TechnicalException => await HandleTechnicalExceptionAsync(e),
                     _ => await HandleExceptionAsync(e)
                 };
 
@@ -56,6 +58,26 @@ namespace PlaceHolder.API.Middlewares
                 case NotFoundException _:
                     errorResponse.StatusCode = HttpStatusCode.NotFound;
                     errorResponse.Message = ExceptionMessages.NotFoundExceptionMessage;
+                    break;
+
+                default:
+                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
+                    errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;
+                    break;
+            }
+
+            return Task.FromResult(errorResponse);
+        }
+
+        private static Task<ErrorResponse> HandleTechnicalExceptionAsync(Exception exception)
+        {
+            var errorResponse = new ErrorResponse { Success = false };
+
+            switch (exception)
+            {
+                case ConfigurationException _:
+                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
+                    errorResponse.Message = ExceptionMessages.InvalidConfigurationExceptionMessage;
                     break;
 
                 default:
