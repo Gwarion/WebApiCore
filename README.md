@@ -24,7 +24,7 @@ This is a proof of concept for a .NET 6 WebApi using
 * With SQL Server Configuration Manager
   * Open SQL Server Network Configuration > Protocols for SQLEXPRESS
   * Enable Shared Memory / Named Pipes and TCP\IP protocols
-* Reflect the new database connection string in the PlaceHolder.DependencyInjection.Options.DatabaseOptions class
+* Reflect the new database connection string in the PlaceHolder.DependencyInjection.Options.DatabaseOptions class and launchsettings.json
 * Rebuild the whole solution and start the application from the PlaceHolder configuration
 
 
