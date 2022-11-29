@@ -1,8 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
-using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
+﻿using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlaceHolder.DependencyInjection.Options
 {
@@ -15,6 +12,14 @@ namespace PlaceHolder.DependencyInjection.Options
 
         public static string GetConnectionString()
         {
+            //Used by EF Core tools for local migrations creation
+            if (DataSource == null && InitialCatalog == null && UserId == null && Password == null
+                && Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                return @"Data Source=GEOFFREY\\SQLEXPRESS;Initial Catalog=LocalDb;User ID=sa;Password=123456789";
+            }
+
+            //Read Connection String from Environment Variables
             if (string.IsNullOrEmpty(DataSource)) throw new ConfigurationException($"{nameof(DataSource)} is not set");
             if (string.IsNullOrEmpty(InitialCatalog)) throw new ConfigurationException($"{nameof(InitialCatalog)} is not set");
             if (string.IsNullOrEmpty(UserId)) throw new ConfigurationException($"{nameof(UserId)} is not set");
