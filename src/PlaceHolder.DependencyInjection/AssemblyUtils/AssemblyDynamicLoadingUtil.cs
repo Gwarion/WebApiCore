@@ -27,10 +27,10 @@ namespace PlaceHolder.DependencyInjection.AssemblyUtils
 
             var loadedAssembly = _loadContext.LoadFromAssemblyPath(assemblyPath);
 
-            foreach(var item in loadedAssembly.GetReferencedAssemblies())
+            foreach(var referenceAssemblyName in loadedAssembly.GetReferencedAssemblies())
             {
                 var resolver = new AssemblyDependencyResolver(loadedAssembly.Location);
-                var toLoadAssemblyPath = resolver.ResolveAssemblyToPath(item);
+                var toLoadAssemblyPath = resolver.ResolveAssemblyToPath(referenceAssemblyName);
 
                 if(!String.IsNullOrEmpty(toLoadAssemblyPath))
                 {
@@ -38,7 +38,7 @@ namespace PlaceHolder.DependencyInjection.AssemblyUtils
                 }
                 else
                 {
-                    _loadContext.LoadFromAssemblyName(item);
+                    _loadContext.LoadFromAssemblyName(referenceAssemblyName);
                 }
             }
 
