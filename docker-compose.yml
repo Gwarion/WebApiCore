@@ -3,10 +3,10 @@ version: '3.4'
 services:
   placeholder.api:
     environment:
-        - ConnectionString_DataSource=db, 1433
-        - ConnectionString_InitialCatalog=master
-        - ConnectionString_UserId=sa
-        - ConnectionString_Password=A&VeryComplex123Password;
+        - DATABASE__DATASOURCE=db, 1433
+        - DATABASE__INITIALCATALOG=master
+        - DATABASE__USERID=sa
+        - DATABASE__PASSWORD=A&VeryComplex123Password;
     image: ${DOCKER_REGISTRY-}placeholderapi
     build:
       context: .

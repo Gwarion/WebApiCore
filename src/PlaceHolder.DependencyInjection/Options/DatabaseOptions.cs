@@ -1,25 +1,18 @@
 ﻿using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
-using System;
 
 namespace PlaceHolder.DependencyInjection.Options
 {
-    public static class DatabaseOptions
+    public class DatabaseOptions
     {
-        private static readonly string DataSource = Environment.GetEnvironmentVariable("ConnectionString_DataSource");
-        private static readonly string InitialCatalog = Environment.GetEnvironmentVariable("ConnectionString_InitialCatalog");
-        private static readonly string UserId = Environment.GetEnvironmentVariable("ConnectionString_UserId");
-        private static readonly string Password = Environment.GetEnvironmentVariable("ConnectionString_Password");
+        public static readonly string Position = "Database";
 
-        public static string GetConnectionString()
+        public string DataSource { get; set; }
+        public string InitialCatalog { get; set; }
+        public string UserId { get; set; }
+        public string Password { get; set; }
+
+        public string GetConnectionString()
         {
-            //Used by EF Core tools for local migrations creation
-            if (DataSource == null && InitialCatalog == null && UserId == null && Password == null
-                && Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-            {
-                return @"Data Source=GEOFFREY\\SQLEXPRESS;Initial Catalog=LocalDb;User ID=sa;Password=123456789";
-            }
-
-            //Read Connection String from Environment Variables
             if (string.IsNullOrEmpty(DataSource)) throw new ConfigurationException($"{nameof(DataSource)} is not set");
             if (string.IsNullOrEmpty(InitialCatalog)) throw new ConfigurationException($"{nameof(InitialCatalog)} is not set");
             if (string.IsNullOrEmpty(UserId)) throw new ConfigurationException($"{nameof(UserId)} is not set");

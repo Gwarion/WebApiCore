@@ -19,21 +19,14 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
 
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
-            CongfigureCommandDbContext(services);
+            var dbOptions = new DatabaseOptions();
+            configuration.GetSection(DatabaseOptions.Position).Bind(dbOptions);
 
-            services.AddAutoMapper(GetType().Assembly);
-
-            services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
-            services.AddScoped<IDbContext, PlaceHolderContext>();
-        }
-
-        private static void CongfigureCommandDbContext(IServiceCollection services)
-        {
             services.AddDbContextPool<PlaceHolderContext>((provider, options) =>
             {
                 //cf https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                 options.UseSqlServer(
-                    DatabaseOptions.GetConnectionString(),
+                    dbOptions.GetConnectionString(),
                     sqlOptions =>
                     {
                         sqlOptions.EnableRetryOnFailure(
@@ -42,6 +35,11 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
                             errorNumbersToAdd: null);
                     });
             });
+
+            services.AddAutoMapper(GetType().Assembly);
+
+            services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
+            services.AddScoped<IDbContext, PlaceHolderContext>();
         }
     }
 }
