@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using PlaceHolder.DependencyInjection.Options;
+using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 {
@@ -16,7 +15,13 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 
         public PlaceHolderContext CreateDbContext(string[] args)
         {
-            var connectionString = DatabaseOptions.GetConnectionString();
+            // Prepare configuration builder
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
+                .AddJsonFile(@"appsettings.json", optional: false)
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("Migration");
 
             if (string.IsNullOrEmpty(connectionString))
             {
