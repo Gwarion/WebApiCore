@@ -6,16 +6,15 @@ using System.IO;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 {
-    public class PlaceHolderContextFactory : IDesignTimeDbContextFactory<PlaceHolderContext>
+    public class MigrationDbContextFactory : IDesignTimeDbContextFactory<PlaceHolderContext>
     {
         /// <summary>
         /// A parameter-less constructor is required by the EF Core CLI tools.
         /// </summary>
-        public PlaceHolderContextFactory() { }
+        public MigrationDbContextFactory() { }
 
         public PlaceHolderContext CreateDbContext(string[] args)
         {
-            // Prepare configuration builder
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
                 .AddJsonFile(@"appsettings.json", optional: false)
