@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlaceHolder.Utils.Exceptions
+﻿namespace PlaceHolder.Utils.Exceptions
 {
     public static class ExceptionMessages
     {
@@ -13,5 +7,6 @@ namespace PlaceHolder.Utils.Exceptions
         public static readonly string NotFoundExceptionMessage = "Requested item was not found";
         public static readonly string ValueObjectValidationExceptionMessage = "Invalid Request data";
         public static readonly string InvalidConfigurationExceptionMessage= "Missing or invalid configuration";
+        public static readonly string KafkaProducerExceptionMessage = "Could not send Kafka message";
     }
 }

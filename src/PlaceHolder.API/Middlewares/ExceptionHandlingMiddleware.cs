@@ -55,11 +55,14 @@ namespace PlaceHolder.API.Middlewares
 
             switch (exception)
             {
-                case NotFoundException _:
+                case NotFoundException:
                     errorResponse.StatusCode = HttpStatusCode.NotFound;
                     errorResponse.Message = ExceptionMessages.NotFoundExceptionMessage;
                     break;
-
+                case KafkaProducerException:
+                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
+                    errorResponse.Message = ExceptionMessages.KafkaProducerExceptionMessage;
+                    break;
                 default:
                     errorResponse.StatusCode = HttpStatusCode.InternalServerError;
                     errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;
@@ -75,7 +78,7 @@ namespace PlaceHolder.API.Middlewares
 
             switch (exception)
             {
-                case ConfigurationException _:
+                case ConfigurationException:
                     errorResponse.StatusCode = HttpStatusCode.InternalServerError;
                     errorResponse.Message = ExceptionMessages.InvalidConfigurationExceptionMessage;
                     break;

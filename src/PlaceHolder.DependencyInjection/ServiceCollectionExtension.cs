@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace PlaceHolder.DependencyInjection
 {
@@ -20,6 +19,7 @@ namespace PlaceHolder.DependencyInjection
         private static readonly List<string> _adaptersAssembly = new List<string>()
         {
             "PlaceHolder.DrivenAdapter.SQLServer",
+            "PlaceHolder.DrivenAdapter.KafkaProducer",
             "PlaceHolder.DrivingAdapter.WebApi"
         };
 

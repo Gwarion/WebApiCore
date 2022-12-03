@@ -1,22 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using PlaceHolder.DependencyInjection.Options;
+using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 {
-    public class PlaceHolderContextFactory : IDesignTimeDbContextFactory<PlaceHolderContext>
+    public class MigrationDbContextFactory : IDesignTimeDbContextFactory<PlaceHolderContext>
     {
         /// <summary>
         /// A parameter-less constructor is required by the EF Core CLI tools.
         /// </summary>
-        public PlaceHolderContextFactory() { }
+        public MigrationDbContextFactory() { }
 
         public PlaceHolderContext CreateDbContext(string[] args)
         {
-            var connectionString = DatabaseOptions.GetConnectionString();
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
+                .AddJsonFile(@"appsettings.json", optional: false)
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("Migration");
 
             if (string.IsNullOrEmpty(connectionString))
             {

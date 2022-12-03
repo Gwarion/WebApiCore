@@ -12,10 +12,11 @@
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionString_InitialCatalog": "LocalDb",
-        "ConnectionString_DataSource": "GEOFFREY\\SQLEXPRESS",
-        "ConnectionString_Password": "123456789",
-        "ConnectionString_UserId": "sa"
+        "DATABASE__DATASOURCE": "GEOFFREY\\SQLEXPRESS",
+        "DATABASE__INITIALCATALOG": "LocalDb",
+        "DATABASE__USERID": "sa",
+        "DATABASE__PASSWORD": "123456789",
+        "KAFKAPRODUCER__BOOTSTRAPSERVERS": "localhost:9092"
       }
     }
   }

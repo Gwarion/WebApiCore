@@ -3,16 +3,20 @@ version: '3.4'
 services:
   placeholder.api:
     environment:
-        - ConnectionString_DataSource=db, 1433
-        - ConnectionString_InitialCatalog=master
-        - ConnectionString_UserId=sa
-        - ConnectionString_Password=A&VeryComplex123Password;
+        - DATABASE__DATASOURCE=db, 1433
+        - DATABASE__INITIALCATALOG=master
+        - DATABASE__USERID=sa
+        - DATABASE__PASSWORD=A&VeryComplex123Password;
+        - KAFKAPRODUCER__BOOTSTRAPSERVERS=kafka
     image: ${DOCKER_REGISTRY-}placeholderapi
     build:
       context: .
       dockerfile: src/PlaceHolder.API/Dockerfile
     depends_on:
         - db
+        - kafka
+    ports:
+    - "55000:80"
 
   db:
     container_name: "SqlServer2022"
@@ -22,3 +26,16 @@ services:
     environment:
         SA_PASSWORD: "A&VeryComplex123Password"
         ACCEPT_EULA: "Y"
+ 
+  kafka:
+    container_name: "Kafka"
+    ports:
+        - "2181:2181" #ZooKeeper
+        - "3030:3030" #Web Server
+        - "8081:8081" #Schema Registry
+        - "8082:8082" #Kafka REST Proxy
+        - "8083:8083" #Kafka Connect Distributed
+        - "9092:9092" #Kafka Broker
+    environment:
+        - ADV_HOST=kafka
+    image: landoop/fast-data-dev
