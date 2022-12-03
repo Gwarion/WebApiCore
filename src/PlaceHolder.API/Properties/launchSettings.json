@@ -15,7 +15,8 @@
         "DATABASE__DATASOURCE": "GEOFFREY\\SQLEXPRESS",
         "DATABASE__INITIALCATALOG": "LocalDb",
         "DATABASE__USERID": "sa",
-        "DATABASE__PASSWORD": "123456789"
+        "DATABASE__PASSWORD": "123456789",
+        "KAFKAPRODUCER__BOOTSTRAPSERVERS": "localhost:9092"
       }
     }
   }

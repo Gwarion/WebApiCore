@@ -7,6 +7,7 @@ services:
         - DATABASE__INITIALCATALOG=master
         - DATABASE__USERID=sa
         - DATABASE__PASSWORD=A&VeryComplex123Password;
+        - KAFKAPRODUCER__BOOTSTRAPSERVERS=kafka
     image: ${DOCKER_REGISTRY-}placeholderapi
     build:
       context: .
@@ -14,6 +15,8 @@ services:
     depends_on:
         - db
         - kafka
+    ports:
+    - "55000:80"
 
   db:
     container_name: "SqlServer2022"
@@ -25,14 +28,14 @@ services:
         ACCEPT_EULA: "Y"
  
   kafka:
-      container_name: "Kafka"
-      ports:
-          - '2181:2181' #ZooKeeper
-          - '3030:3030' #Web Server
-          - '8081:8081' #Schema Registry
-          - '8082:8082' #Kafka REST Proxy
-          - '8083:8083' #Kafka Connect Distributed
-          - '9092:9092' #Kafka Broker
-      environment:
-          - ADV_HOST=kafka
-      image: landoop/fast-data-dev
+    container_name: "Kafka"
+    ports:
+        - "2181:2181" #ZooKeeper
+        - "3030:3030" #Web Server
+        - "8081:8081" #Schema Registry
+        - "8082:8082" #Kafka REST Proxy
+        - "8083:8083" #Kafka Connect Distributed
+        - "9092:9092" #Kafka Broker
+    environment:
+        - ADV_HOST=kafka
+    image: landoop/fast-data-dev

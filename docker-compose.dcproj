@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>7f67c0e0-f338-42f3-b8dc-ceaff4e43dcc</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>localhost:{ServicePort}/swagger</DockerServiceUrl>
+    <DockerServiceUrl>localhost:55000/swagger</DockerServiceUrl>
     <DockerServiceName>placeholder.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

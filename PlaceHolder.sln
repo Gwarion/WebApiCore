@@ -40,6 +40,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.Utils", "src\Pl
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceHolder.DrivenAdapter.KafkaProducer", "src\PlaceHolder.DrivenAdapter.KafkaProducer\PlaceHolder.DrivenAdapter.KafkaProducer.csproj", "{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{1AD61DF3-5C9A-4D54-AF77-FC2DABCFE29F} = {CB118F4B-6544-4299-8850-C0AD8B9BF911}
 		{493C2CCD-0BAC-40D9-8982-7D88014D6D7C} = {171A5AF9-0707-43F1-8BC5-0E96642B9828}
 		{4F482835-6723-4D40-BF45-7671D2881D7D} = {493C2CCD-0BAC-40D9-8982-7D88014D6D7C}
+		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9} = {A11D10D8-41B6-4879-B443-0804114FC740}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84542048-4F94-4915-8A6F-909F5A1DE70D}

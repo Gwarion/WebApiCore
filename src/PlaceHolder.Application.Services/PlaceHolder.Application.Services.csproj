@@ -15,4 +15,8 @@
 		<PackageReference Include="MediatR" Version="11.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\PlaceHolder.Domain.SeedWork\PlaceHolder.Domain.SeedWork.csproj" />
+	</ItemGroup>
+
 </Project>
