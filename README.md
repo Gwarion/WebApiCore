@@ -2,7 +2,7 @@
 
 This is a proof of concept for a .NET 6 WebApi using 
 * CQRS with a Mediatr pipeline
-* DDD and Hexagonal architecture : every adapter is loaded through reflection at runtime
+* DDD and Hexagonal architecture : Adapters are loaded through reflection at runtime
 * Proper exception handling middleware
 * EF Core 6.0 for the data mapping and database migrations
 * Kafka Event production
