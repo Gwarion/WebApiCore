@@ -18,7 +18,7 @@ This is a proof of concept for a .NET 6 WebApi using
 * Wait for images to load (first time can be super long)
 * API is running on `localhost:55000`
 * Kafka (lenses.io) is running on `localhost:3030` (you can observe ConsumerCreated and ConsumerUpdated events in the Consumer topic after executing a request)
-* SQL Server is running on `localhost, 1433` - login are set in the docker-compose.yml file
+* SQL Server is running on `localhost, 1433` - logins are set in the docker-compose.yml file
 
 ### Using the default WebApi Project (hard way)
 * /!\ Kafka currently does not work without the docker container
