@@ -1,0 +1,21 @@
+﻿Migration are executed at the start of the API with the method MigrateDatabase()
+
+To create a new migration through the Package Manager Console you first need to set some environnement 
+variables so they are not null.
+
+$env:DATABASE__DATASOURCE="_"
+$env:DATABASE__INITIALCATALOG="_"
+$env:DATABASE__USERID="_"
+$env:DATABASE__PASSWORD="_"
+
+then you can 
+
+Add-Migration NAME
+
+This is related to an open issue in the EFCore framework :
+https://github.com/dotnet/efcore/issues/25053
+
+and 
+https://stackoverflow.com/questions/70368401/why-does-dotnet-ef-migrations-add-start-my-application
+
+

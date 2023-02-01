@@ -8,9 +8,7 @@ namespace PlaceHolder.Application.Logic.Queries.Consumers
         public GetOneConsumerByIdQueryValidator()
         {
             RuleFor(command => command.Guid)
-                .NotNull()
-                .WithMessage(command => $"{nameof(command.Guid)} must not be null")
-                .Must(guid => guid != default)
+                .NotEmpty()
                 .WithMessage(command => $"{nameof(command.Guid)} must be set");
         }
     }

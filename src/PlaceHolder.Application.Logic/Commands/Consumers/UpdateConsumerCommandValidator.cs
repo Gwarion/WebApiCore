@@ -7,20 +7,16 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
         public UpdateConsumerCommandValidator()
         {
             RuleFor(command => command.FirstName)
-                .NotNull()
-                .WithMessage(command => $"{nameof(command.FirstName)} must not be null")
-                .MinimumLength(1)
-                .WithMessage(command => $"{nameof(command.FirstName)} must not be empty");
+                .NotEmpty()
+                .WithMessage(command => $"{nameof(command.FirstName)} must be set");
 
             RuleFor(command => command.LastName)
-                .NotNull()
-                .WithMessage(command => $"{nameof(command.LastName)} must not be null")
-                .MinimumLength(1)
-                .WithMessage(command => $"{nameof(command.LastName)} must not be empty");
+                .NotEmpty()
+                .WithMessage(command => $"{nameof(command.LastName)} must be set");
 
             RuleFor(command => command.Guid)
-                .NotNull()
-                .WithMessage(command => $"{nameof(command.Guid)} must not be null")
+                .NotEmpty()
+                .WithMessage(command => $"{nameof(command.Guid)} must be set")
                 .Must(guid => guid != default)
                 .WithMessage(command => $"{nameof(command.Guid)} must be set");
         }

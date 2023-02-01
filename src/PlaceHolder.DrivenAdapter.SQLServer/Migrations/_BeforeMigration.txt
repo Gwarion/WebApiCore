@@ -1,8 +1,0 @@
-﻿To execute migration
-
-$env:DATABASE__DATASOURCE="_"
-$env:DATABASE__INITIALCATALOG="_"
-$env:DATABASE__USERID="_"
-$env:DATABASE__PASSWORD="_"
-
-Add-Migration NOM_MIGRATION

@@ -12,18 +12,10 @@ namespace PlaceHolder.DrivenAdapter.KafkaProducer
 {
     public class PlaceHolderKafkaProducer : IKafkaProducer
     {
-        private readonly KafkaProducerOptions _options;
         private readonly ProducerConfig _producerConfig;
 
         public PlaceHolderKafkaProducer(KafkaProducerOptions options)
-        {
-            _options = options;
-
-            _producerConfig = new ProducerConfig
-            {
-                BootstrapServers = _options.BootStrapServers
-            };
-        }
+            => _producerConfig = new(){ BootstrapServers = options.BootStrapServers };
 
         public async Task ProduceAsync(DomainEvent domainEvent)
         {
@@ -32,9 +24,9 @@ namespace PlaceHolder.DrivenAdapter.KafkaProducer
                 throw new KafkaProducerException($"Metadata not set for {domainEvent.GetType().Name}");
             }
 
-            using var p = new ProducerBuilder<string, string>(_producerConfig).Build();
+            using var producer = new ProducerBuilder<string, string>(_producerConfig).Build();
 
-            await p.ProduceAsync(metaData.TopicName, new Message<string, string>
+            await producer.ProduceAsync(metaData.TopicName, new Message<string, string>
             {
                 Key = domainEvent.Guid.ToString(),
                 Value = JsonConvert.SerializeObject(domainEvent),

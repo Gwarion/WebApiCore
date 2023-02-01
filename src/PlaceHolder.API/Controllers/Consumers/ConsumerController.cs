@@ -31,11 +31,12 @@ namespace PlaceHolder.API.Controllers.Consumers
         public async Task<IActionResult> UpdateConsumer([FromBody] ConsumerDto consumer)
         {
             var result = await _consumerService.UpdateConsumerAsync(consumer);
-            return new OkObjectResult(result) { StatusCode = StatusCodes.Status201Created };
+            return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
         }
 
         [HttpGet("{consumerId}", Name = "GetOne")]
         [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetOneConsumer([FromRoute] string consumerId)
         {
