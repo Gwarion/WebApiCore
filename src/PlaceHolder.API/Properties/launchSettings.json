@@ -11,6 +11,9 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
+        "ADAPTERS__AdaptersAssembliesToUse__0": "PlaceHolder.DrivenAdapter.SQLServer",
+        "ADAPTERS__AdaptersAssembliesToUse__1": "PlaceHolder.DrivenAdapter.KafkaProducer",
+        "ADAPTERS__AdaptersAssembliesToUse__2": "PlaceHolder.DrivingAdapter.WebApi",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE__DATASOURCE": "GEOFFREY\\SQLEXPRESS",
         "DATABASE__INITIALCATALOG": "LocalDb",

@@ -6,6 +6,7 @@ using PlaceHolder.Application.Services.Cqrs.Dispatchers;
 using PlaceHolder.Application.Services.Cqrs.MediatrPipeline;
 using PlaceHolder.Application.Services.Ports.Cqrs;
 using PlaceHolder.DependencyInjection.AssemblyUtils;
+using PlaceHolder.DependencyInjection.Options;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,13 +17,6 @@ namespace PlaceHolder.DependencyInjection
 {
     public static class ServiceCollectionExtension
     {
-        private static readonly List<string> _adaptersAssembly = new List<string>()
-        {
-            "PlaceHolder.DrivenAdapter.SQLServer",
-            "PlaceHolder.DrivenAdapter.KafkaProducer",
-            "PlaceHolder.DrivingAdapter.WebApi"
-        };
-
         public static IServiceCollection AddApplicationCore(this IServiceCollection services)
         {
             //CQRS
@@ -45,7 +39,13 @@ namespace PlaceHolder.DependencyInjection
 
         public static IServiceCollection AddAdapters(this IServiceCollection services, IConfiguration configuration)
         {
-            var assembliesPath = AssemblyFinderUtil.GetAdaptersAssembliesPath(_adaptersAssembly);
+            var option = new AdaptersOptions();
+            configuration.GetSection(AdaptersOptions.Position).Bind(option);
+
+            if (option.AdaptersAssembliesToUse == null || !option.AdaptersAssembliesToUse.Any())
+                return services;
+
+            var assembliesPath = AssemblyFinderUtil.GetAdaptersAssembliesPath(option.AdaptersAssembliesToUse);
 
             foreach(var assemblyPath in assembliesPath)
             {
