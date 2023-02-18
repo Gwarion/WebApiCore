@@ -23,7 +23,7 @@ namespace PlaceHolder.API.IntegrationTests.Hooks
         [BeforeScenario]
         public static void BeforeScenario(IObjectContainer container)
         {
-            container.RegisterInstanceAs<TestResultTracker>(new TestResultTracker());
+            container.RegisterInstanceAs<HttpRequestTestTracker>(new HttpRequestTestTracker());
         }
     }
 }

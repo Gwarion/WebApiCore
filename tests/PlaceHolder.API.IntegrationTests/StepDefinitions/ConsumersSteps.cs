@@ -30,13 +30,15 @@ namespace PlaceHolder.API.IntegrationTests.StepDefinitions
         {
             _consumerDto = table.CreateInstance<ConsumerDto>();
             _consumerDto.Address = _addressDto;
+
+            _container.Resolve<HttpRequestTestTracker>().SetContent(_consumerDto);
         }
 
         [Then(@"I Get the following ConsumerDto")]
         public async Task ThenIGetTheFollowingData(Table table)
         {
             var dto = table.CreateInstance<ConsumerDto>();
-            await _container.Resolve<TestResultTracker>().AssertData(dto);
+            await _container.Resolve<HttpRequestTestTracker>().AssertData(dto);
         }
     }
 }

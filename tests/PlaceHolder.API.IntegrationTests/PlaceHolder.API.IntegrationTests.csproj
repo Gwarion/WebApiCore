@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\PlaceHolder.API\PlaceHolder.API.csproj" />
-    <ProjectReference Include="..\..\src\PlaceHolder.DrivenAdapter.KafkaProducer\PlaceHolder.DrivenAdapter.KafkaProducer.csproj" />
-    <ProjectReference Include="..\..\src\PlaceHolder.DrivenAdapter.SQLServer\PlaceHolder.DrivenAdapter.SQLServer.csproj" />
+    <ProjectReference Include="..\..\src\PlaceHolder.DrivenAdapter.KafkaProducer.Mock\PlaceHolder.DrivenAdapter.KafkaProducer.Mock.csproj" />
+    <ProjectReference Include="..\..\src\PlaceHolder.DrivenAdapter.SQLServer.Mock\PlaceHolder.DrivenAdapter.SQLServer.Mock.csproj" />
     <ProjectReference Include="..\..\src\PlaceHolder.DrivingAdapter.WebApi\PlaceHolder.DrivingAdapter.WebApi.csproj" />
   </ItemGroup>
 

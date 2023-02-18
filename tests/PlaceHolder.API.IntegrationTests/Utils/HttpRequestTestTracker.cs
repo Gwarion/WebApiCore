@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace PlaceHolder.API.IntegrationTests.Utils
 {
-    public class TestResultTracker
+    public class HttpRequestTestTracker
     {
+        public StringContent Content { get; private set; }
+
         private HttpResponseMessage _response;
         private List<Exception> _exceptions = new();
 
@@ -18,6 +20,8 @@ namespace PlaceHolder.API.IntegrationTests.Utils
 
         public void RegisterResponse(HttpResponseMessage response) => _response = response;
         public void RegisterException(Exception e) => _exceptions.Add(e);
+        public void SetContent<TData>(TData data)
+         => Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
 
         public void AssertResponse(HttpStatusCode expectedStatusCode)
         {
@@ -34,14 +38,29 @@ namespace PlaceHolder.API.IntegrationTests.Utils
             var actual = JsonConvert.DeserializeObject<TExpected>(body);
             Assert.NotNull(actual);
 
+            AssertObject(expected, actual);
+        }
+
+        private void AssertObject(object expected, object actual)
+        {
             var type = expected.GetType();
             foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type))
             {
                 var propertyInfo = type.GetProperty(property.Name);
-                var expectedValue = propertyInfo.GetValue(expected);
-                var actualValue = propertyInfo.GetValue(actual);
+                var expectedData = propertyInfo.GetValue(expected);
 
-                Assert.Equal(expectedValue, actualValue);
+                if (expectedData == null) { continue; }
+
+                var actualData = propertyInfo.GetValue(actual);
+
+                if (propertyInfo.PropertyType.IsValueType || propertyInfo.PropertyType == typeof(string))
+                {
+                    Assert.Equal(expectedData, actualData);
+                }
+                else
+                {
+                    AssertObject(expectedData, actualData);
+                }
             }
         }
     }

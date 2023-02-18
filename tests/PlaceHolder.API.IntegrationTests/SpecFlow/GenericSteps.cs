@@ -18,12 +18,16 @@ namespace PlaceHolder.API.IntegrationTests.SpecFlow
         public GenericSteps(IObjectContainer container) => _container = container;
 
         [When(@"I send the following request")]
-        public async void WhenISendTheFollowingRequest(HttpRequestMessage request)
+        public async Task WhenISendTheFollowingRequest(Table table)
         {
-            var tracker = _container.Resolve<TestResultTracker>();
+            var tracker = _container.Resolve<HttpRequestTestTracker>();
             try
             {
-                tracker.RegisterResponse(await HttpClientHelper.SendAsync(request));
+                var request = table.CreateInstance<HttpRequestMessage>();
+                request.Content = tracker.Content;
+
+                var response = await HttpClientHelper.SendAsync(request);
+                tracker.RegisterResponse(response);
             }
             catch(Exception e)
             {
@@ -34,13 +38,13 @@ namespace PlaceHolder.API.IntegrationTests.SpecFlow
         [Then(@"No exception occurs")]
         public void ThenNoExceptionOccurs()
         {
-            Assert.False(_container.Resolve<TestResultTracker>().ExceptionOccured);
+            Assert.False(_container.Resolve<HttpRequestTestTracker>().ExceptionOccured);
         }
 
         [Then(@"I Get the status code '([^']*)'")]
         public void ThenIGetTheStatusCode(HttpStatusCode expetedStatusCode)
         {
-            _container.Resolve<TestResultTracker>().AssertResponse(expetedStatusCode);
+            _container.Resolve<HttpRequestTestTracker>().AssertResponse(expetedStatusCode);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace PlaceHolder.API.IntegrationTests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Consumers", "A short summary of the feature", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Consumers", null, ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -83,14 +83,12 @@ namespace PlaceHolder.API.IntegrationTests.Features
         [Xunit.SkippableFactAttribute(DisplayName="CreateConsumer should create one consumer")]
         [Xunit.TraitAttribute("FeatureTitle", "Consumers")]
         [Xunit.TraitAttribute("Description", "CreateConsumer should create one consumer")]
-        [Xunit.TraitAttribute("Category", "tag1")]
         public void CreateConsumerShouldCreateOneConsumer()
         {
-            string[] tagsOfScenario = new string[] {
-                    "tag1"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("CreateConsumer should create one consumer", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+#line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -110,7 +108,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Strasbourg",
                             "1 avenue de l\'europe",
                             "67000"});
-#line 7
+#line 4
  testRunner.Given("the following AddressDto", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -119,7 +117,7 @@ this.ScenarioInitialize(scenarioInfo);
                 table2.AddRow(new string[] {
                             "John",
                             "Doe"});
-#line 10
+#line 7
  testRunner.Given("the following ConsumerDto", ((string)(null)), table2, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -127,21 +125,24 @@ this.ScenarioInitialize(scenarioInfo);
                             "RequestUri"});
                 table3.AddRow(new string[] {
                             "POST",
-                            "/aaa/"});
-#line 13
+                            "Consumer"});
+#line 10
  testRunner.When("I send the following request", ((string)(null)), table3, "When ");
 #line hidden
-#line 16
+#line 13
  testRunner.Then("No exception occurs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 17
+#line 14
  testRunner.And("I Get the status code \'201\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                            "",
-                            ""});
-#line 18
- testRunner.And("I Get the following data", ((string)(null)), table4, "And ");
+                            "FirstName",
+                            "lastName"});
+                table4.AddRow(new string[] {
+                            "John",
+                            "Doe"});
+#line 15
+ testRunner.And("I Get the following ConsumerDto", ((string)(null)), table4, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
