@@ -1,11 +1,6 @@
 ﻿using BoDi;
 using PlaceHolder.API.Controllers.Consumers.Dtos;
 using PlaceHolder.API.IntegrationTests.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow.Assist;
 
 namespace PlaceHolder.API.IntegrationTests.StepDefinitions
@@ -31,7 +26,7 @@ namespace PlaceHolder.API.IntegrationTests.StepDefinitions
             _consumerDto = table.CreateInstance<ConsumerDto>();
             _consumerDto.Address = _addressDto;
 
-            _container.Resolve<HttpRequestTestTracker>().SetContent(_consumerDto);
+            _container.Resolve<HttpRequestTestTracker>().RegisterContent(_consumerDto);
         }
 
         [Then(@"I Get the following ConsumerDto")]

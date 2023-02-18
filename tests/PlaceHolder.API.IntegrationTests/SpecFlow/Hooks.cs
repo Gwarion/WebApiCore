@@ -1,11 +1,6 @@
 ﻿using BoDi;
 using PlaceHolder.API.IntegrationTests.SpecFlow.Retrievers;
 using PlaceHolder.API.IntegrationTests.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow.Assist;
 
 namespace PlaceHolder.API.IntegrationTests.Hooks

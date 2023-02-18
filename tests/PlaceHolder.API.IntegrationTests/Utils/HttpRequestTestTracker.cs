@@ -1,11 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PlaceHolder.API.IntegrationTests.Utils
 {
@@ -20,7 +15,7 @@ namespace PlaceHolder.API.IntegrationTests.Utils
 
         public void RegisterResponse(HttpResponseMessage response) => _response = response;
         public void RegisterException(Exception e) => _exceptions.Add(e);
-        public void SetContent<TData>(TData data)
+        public void RegisterContent<TData>(TData data)
          => Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
 
         public void AssertResponse(HttpStatusCode expectedStatusCode)
