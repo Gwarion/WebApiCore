@@ -5,6 +5,7 @@ using PlaceHolder.Application.Logic.Commands.Consumers;
 using PlaceHolder.Application.Logic.Queries.Consumers;
 using PlaceHolder.Application.Services.Ports.Cqrs;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PlaceHolder.DrivingAdapter.WebApi.Consumers
@@ -47,5 +48,11 @@ namespace PlaceHolder.DrivingAdapter.WebApi.Consumers
             return _mapper.Map<Consumer, ConsumerDto>(await _queryDispatcher.DispatchAsync(query));
         }
 
+        public async Task<List<ConsumerDto>> GetAllAsync()
+        {
+            var query = new GetAllConsumersQuery();
+
+            return _mapper.Map<List<Consumer>, List<ConsumerDto>>(await _queryDispatcher.DispatchAsync(query));
+        }
     }
 }

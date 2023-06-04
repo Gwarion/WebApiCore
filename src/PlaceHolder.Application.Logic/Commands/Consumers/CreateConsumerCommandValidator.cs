@@ -7,11 +7,11 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
         public CreateConsumerCommandValidator()
         {
             RuleFor(command => command.FirstName)
-                .NotEmpty()
+                .NotNull()
                 .WithMessage(command => $"{nameof(command.FirstName)} must be set");
 
             RuleFor(command => command.LastName)
-                .NotEmpty()
+                .NotNull()
                 .WithMessage(command => $"{nameof(command.LastName)} must be set");
         }
     }

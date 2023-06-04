@@ -2,13 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using PlaceHolder.Application.Services.BackgroundServices;
 using PlaceHolder.Application.Services.Cqrs.Dispatchers;
 using PlaceHolder.Application.Services.Cqrs.MediatrPipeline;
 using PlaceHolder.Application.Services.Ports.Cqrs;
 using PlaceHolder.DependencyInjection.AssemblyUtils;
 using PlaceHolder.DependencyInjection.Options;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -64,6 +64,15 @@ namespace PlaceHolder.DependencyInjection
                     throw;
                 }
             }
+
+            return services;
+        }
+
+        public static IServiceCollection AddBackgroundService(this IServiceCollection services)
+        {
+            services.AddSingleton<BackgroundRequestQueueManager>();
+            services.AddTransient<IAsyncCommandDispatcher, AsyncCommandDispatcher>();
+            services.AddHostedService<BackgroundRequestService>();
 
             return services;
         }
