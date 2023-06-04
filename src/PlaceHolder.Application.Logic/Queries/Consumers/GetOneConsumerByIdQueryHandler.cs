@@ -9,13 +9,9 @@ namespace PlaceHolder.Application.Logic.Queries.Consumers
         private readonly IConsumerRepository _consumerRepository;
 
         public GetOneConsumerByIdQueryHandler(IConsumerRepository consumerRepository)
-        {
-            _consumerRepository = consumerRepository;
-        }
+            => _consumerRepository = consumerRepository;
 
         public override async Task<Consumer> Handle(GetOneConsumerByIdQuery request)
-        {
-            return await _consumerRepository.GetOneByIdAsync(request.Guid);
-        }
+            => await _consumerRepository.GetOneByIdAsync(request.Guid);
     }
 }

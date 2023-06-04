@@ -43,5 +43,14 @@ namespace PlaceHolder.API.Controllers.Consumers
             var result = await _consumerService.GetOneByIdAsync(consumerId);
             return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
         }
+
+        [HttpGet(Name = "GetAll")]
+        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllConsumer()
+        {
+            var result = await _consumerService.GetAllAsync();
+            return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
+        }
     }
 }

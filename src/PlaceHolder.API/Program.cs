@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using PlaceHolder.API.Managers;
 using PlaceHolder.API.Middlewares;
 using PlaceHolder.DependencyInjection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,12 @@ builder.Services.AddVersionedApiExplorer(opts =>
     opts.SubstituteApiVersionInUrl = true;
 });
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 
 builder.Services.AddOpenApiDocument(config =>
 {
@@ -46,6 +52,7 @@ builder.Services.AddOpenApiDocument(config =>
 
 builder.Services.AddApplicationCore();
 builder.Services.AddAdapters(builder.Configuration);
+builder.Services.AddBackgroundService();
 
 /*
 Build and configure app
