@@ -1,8 +1,9 @@
-version: '3.4'
+version: '3.8'
 
 services:
   placeholder.api:
     environment:
+        - ASPNETCORE_ENVIRONMENT=Development
         - ADAPTERS__AdaptersAssembliesToUse__0 = PlaceHolder.DrivenAdapter.SQLServer
         - ADAPTERS__AdaptersAssembliesToUse__1 = PlaceHolder.DrivenAdapter.KafkaProducer
         - ADAPTERS__AdaptersAssembliesToUse__2 = PlaceHolder.DrivingAdapter.WebApi
@@ -20,6 +21,7 @@ services:
         - kafka
     ports:
     - "55000:80"
+    profiles: [DB, KAFKA, GRAFANA]
 
   db:
     container_name: "SqlServer2022"
@@ -29,6 +31,7 @@ services:
     environment:
         SA_PASSWORD: "A&VeryComplex123Password"
         ACCEPT_EULA: "Y"
+    profiles: [DB]
  
   kafka:
     container_name: "Kafka"
@@ -42,3 +45,40 @@ services:
     environment:
         - ADV_HOST=kafka
     image: landoop/fast-data-dev
+    profiles: [KAFKA]
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+        - ./share/prometheus:/etc/prometheus/
+    command: 
+        - '--config.file=/etc/prometheus/prometheus.yml'
+    expose:
+        - 9090
+    ports:
+        - 9090:9090
+    profiles: [GRAFANA]
+
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: grafana
+    ports:
+        - 3000:3000
+    restart: unless-stopped
+    environment:
+        - GF_SECURITY_ADMIN_USER=admin
+        - GF_SECURITY_ADMIN_PASSWORD=grafana
+    links:
+        - prometheus:prometheus
+    volumes:
+        #config files
+        - ./share/grafana/grafana.ini:/etc/grafana/grafana.ini
+        - ./share/grafana/prometheus_dashboard.yaml:/etc/grafana/provisioning/dashboards/prometheus_dashboard.yaml
+        #datasources / json dashboards
+        - ./share/grafana/json_dashboards:/var/lib/grafana/dashboards
+        - ./share/grafana/datasources/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    depends_on:
+        - prometheus
+    profiles: [GRAFANA]

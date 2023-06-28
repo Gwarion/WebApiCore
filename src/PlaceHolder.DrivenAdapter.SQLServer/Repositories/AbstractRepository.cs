@@ -1,7 +1,6 @@
 ﻿using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
 {
@@ -10,5 +9,8 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
         protected PlaceHolderContext _context;
 
         public AbstractRepository(PlaceHolderContext context) => _context = context;
+
+        protected string GetTag([CallerFilePath] string path = "", [CallerMemberName] string methodName = "")
+            => $"{Path.GetFileName(path)} - {methodName}";
     }
 }

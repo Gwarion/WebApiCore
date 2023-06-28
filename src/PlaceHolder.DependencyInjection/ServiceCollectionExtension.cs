@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -7,8 +8,10 @@ using PlaceHolder.Application.Services.Cqrs.Dispatchers;
 using PlaceHolder.Application.Services.Cqrs.MediatrPipeline;
 using PlaceHolder.Application.Services.Ports.Cqrs;
 using PlaceHolder.DependencyInjection.AssemblyUtils;
+using PlaceHolder.DependencyInjection.Diagnostics;
 using PlaceHolder.DependencyInjection.Options;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -75,6 +78,34 @@ namespace PlaceHolder.DependencyInjection
             services.AddHostedService<BackgroundRequestService>();
 
             return services;
+        }
+
+        public static IServiceCollection AddDiagnosticListener<TListener>(this IServiceCollection services)
+            where TListener : class, IDiagnosticListener
+        {
+            services.AddSingleton<IDiagnosticListener, TListener>();
+
+            return services;
+        }
+
+        public static IApplicationBuilder UseDiagnosticMetrics(this IApplicationBuilder builder)
+        {
+            var listeners = builder.ApplicationServices.GetServices<IDiagnosticListener>();
+
+            if(listeners.Any())
+            {
+                var eventObservers = new List<DiagnosticEventObserver>();
+                foreach(var group in listeners.GroupBy(l => l.CategoryName))
+                {
+                    var eventObserver = new DiagnosticEventObserver(group.Key, group.ToList());
+                    eventObservers.Add(eventObserver);
+                }
+
+                var diagnosticObserver = new DiagnosticObserver(eventObservers);
+                _ = DiagnosticListener.AllListeners.Subscribe(diagnosticObserver);
+            }
+
+            return builder;
         }
     }
 }

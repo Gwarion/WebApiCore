@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using PlaceHolder.API.Managers;
 using PlaceHolder.API.Middlewares;
 using PlaceHolder.DependencyInjection;
+using Prometheus;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,6 +65,9 @@ if (app.Environment.IsDevelopment())
     app.Use((context, next) => next.Invoke());
     app.UseDeveloperExceptionPage();
 }
+
+app.UseMetricServer()
+   .UseDiagnosticMetrics();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 

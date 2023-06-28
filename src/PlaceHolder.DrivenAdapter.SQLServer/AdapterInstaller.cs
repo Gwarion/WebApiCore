@@ -6,6 +6,7 @@ using PlaceHolder.Application.Services.Ports.EF;
 using PlaceHolder.DependencyInjection;
 using PlaceHolder.DependencyInjection.Options;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
+using PlaceHolder.DrivenAdapter.SQLServer.Diagnostics;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 using PlaceHolder.DrivenAdapter.SQLServer.Repositories;
 using System;
@@ -40,6 +41,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
 
             services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
             services.AddScoped<IDbContext, PlaceHolderContext>();
+            services.AddDiagnosticListener<CommandExecutedListener>();
         }
     }
 }

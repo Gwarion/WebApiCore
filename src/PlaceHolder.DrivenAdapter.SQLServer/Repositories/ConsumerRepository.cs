@@ -6,6 +6,7 @@ using PlaceHolder.Utils.Exceptions.DomainExceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DbConsumer = PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.Consumer;
 
@@ -41,6 +42,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
         public async Task<Consumer> GetOneByIdAsync(Guid guid)
         {
             var dbConsumer = await _context.Consumers
+                .TagWith(GetTag())
                 .AsNoTracking()
                 .Include(c => c.Address)
                 .SingleOrDefaultAsync(c => c.Guid == guid);
@@ -53,6 +55,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
         public async Task<List<Consumer>> GetAllAsync()
         {
             return await _context.Consumers
+                .TagWith(GetTag())
                 .AsNoTracking()
                 .Select(dbConsumer => new Consumer
                 {

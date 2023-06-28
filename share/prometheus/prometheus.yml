@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+
+rule_files:
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+        - targets: ["localhost:9090"]
+
+  - job_name: "PlaceHolder"
+    metrics_path: /metrics
+    scrape_interval: 30s
+    scrape_timeout: 15s
+    scheme: http
+    static_configs:
+        - targets: ['apollo:80']

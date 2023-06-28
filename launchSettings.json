@@ -1,0 +1,56 @@
+{
+  "profiles": {
+    "DB": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "placeholder.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "composeProfile": {
+        "includes": [
+          "DB"
+        ]
+      }
+    },
+    "DB - KAFKA": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "placeholder.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "composeProfile": {
+        "includes": [
+          "DB",
+          "KAFKA"
+        ]
+      }
+    },
+    "DB - GRAFANA": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "placeholder.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "composeProfile": {
+        "includes": [
+          "DB",
+          "GRAFANA"
+        ]
+      }
+    },
+    "DB - KAFKA- GRAFANA": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "placeholder.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "composeProfile": {
+        "includes": [
+          "DB",
+          "GRAFANA",
+          "KAFKA"
+        ]
+      }
+    }
+  }
+}
