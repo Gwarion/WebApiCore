@@ -36,4 +36,4 @@ This is a proof of concept for a .NET 6 WebApi using
 # To send a request 
 
 * Using [Postman](https://www.postman.com)
-* [Postman Collection](https://drive.google.com/file/d/1xzFUkgNZuJxU9dS3EDygmYdlfTc3ErB3/view?usp=share_link)
+* [Postman Collection](https://github.com/Gwarion/WebApiCore/blob/master/WebApiCore.postman_collection.json)
