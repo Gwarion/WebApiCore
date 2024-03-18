@@ -26,7 +26,7 @@ namespace PlaceHolder.DependencyInjection
             var assemblies = AssemblyFinderUtil.GetApplicationCoreAssemblies();
 
             //MediatR
-            services.AddMediatR(assemblies);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(DbTransactionPipelineBehavior<,>));
 
             //FluentValidation
