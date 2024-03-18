@@ -12,7 +12,7 @@ namespace PlaceHolder.Application.Logic.AsyncCommands
         public ConsumerNameCatchUpCommandHandler(IConsumerRepository consumerRepository)
             => _consumerRepository = consumerRepository;
 
-        public async Task<Unit> Handle(ConsumerNameCatchUpCommand command, CancellationToken cancellationToken)
+        public async Task Handle(ConsumerNameCatchUpCommand command, CancellationToken cancellationToken)
         {
             foreach(var id in command.ConsumerIds)
             {
@@ -30,8 +30,6 @@ namespace PlaceHolder.Application.Logic.AsyncCommands
 
                 _ = await _consumerRepository.UpdateAsync(consumer);
             }
-
-            return Unit.Value;
         }
     }
 }

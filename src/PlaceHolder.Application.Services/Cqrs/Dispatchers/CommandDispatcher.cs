@@ -33,7 +33,7 @@ namespace PlaceHolder.Application.Services.Cqrs.Dispatchers
             {
                 if (command == null) throw new ArgumentNullException(nameof(command), "command can not be null.");
 
-                _ = await _mediator.Send(command);
+                await _mediator.Send(command);
             }
             catch (Exception e)
             {

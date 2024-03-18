@@ -73,12 +73,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 
-app.UseOpenApi().UseSwaggerUi3(config =>
+app.UseOpenApi().UseSwaggerUi(config =>
 {
     config.EnableTryItOut = true;
 });
