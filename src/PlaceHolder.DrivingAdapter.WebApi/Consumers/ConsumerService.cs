@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MediatR;
 using PlaceHolder.API.Controllers.Consumers;
 using PlaceHolder.API.Controllers.Consumers.Dtos;
 using PlaceHolder.Application.Logic.Commands.Consumers;
@@ -12,23 +13,19 @@ namespace PlaceHolder.DrivingAdapter.WebApi.Consumers
 {
     public class ConsumerService : IConsumerService
     {
-        private readonly ICommandDispatcher _commandDispatcher;
-        private readonly IQueryDispatcher _queryDispatcher;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public ConsumerService(ICommandDispatcher commandDispatcher,
-            IQueryDispatcher queryDispatcher,
-            IMapper mapper)
+        public ConsumerService(IMediator mediator, IMapper mapper)
         {
-            _commandDispatcher = commandDispatcher;
-            _queryDispatcher = queryDispatcher;
+            _mediator = mediator;
             _mapper = mapper;
         }
-
+        
         public async Task<ConsumerDto> CreateConsumerAsync(ConsumerDto consumerDto)
         {
             var command = _mapper.Map<ConsumerDto, CreateConsumerCommand>(consumerDto);
-            var res = await _commandDispatcher.DispatchAsync(command);
+            var res = await _mediator.Send(command);
 
             return _mapper.Map<Consumer, ConsumerDto>(res);
         }
@@ -36,7 +33,7 @@ namespace PlaceHolder.DrivingAdapter.WebApi.Consumers
         public async Task<ConsumerDto> UpdateConsumerAsync(ConsumerDto consumerDto)
         {
             var command = _mapper.Map<ConsumerDto, UpdateConsumerCommand>(consumerDto);
-            var res = await _commandDispatcher.DispatchAsync(command);
+            var res = await _mediator.Send(command);
 
             return _mapper.Map<Consumer, ConsumerDto>(res);
         }
@@ -45,14 +42,14 @@ namespace PlaceHolder.DrivingAdapter.WebApi.Consumers
         {
             var query = new GetOneConsumerByIdQuery(guid);
 
-            return _mapper.Map<Consumer, ConsumerDto>(await _queryDispatcher.DispatchAsync(query));
+            return _mapper.Map<Consumer, ConsumerDto>(await _mediator.Send(query));
         }
 
         public async Task<List<ConsumerDto>> GetAllAsync()
         {
             var query = new GetAllConsumersQuery();
 
-            return _mapper.Map<List<Consumer>, List<ConsumerDto>>(await _queryDispatcher.DispatchAsync(query));
+            return _mapper.Map<List<Consumer>, List<ConsumerDto>>(await _mediator.Send(query));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace PlaceHolder.DependencyInjection.Options
             if (string.IsNullOrEmpty(UserId)) throw new ConfigurationException($"{nameof(UserId)} is not set");
             if (string.IsNullOrEmpty(Password)) throw new ConfigurationException($"{nameof(Password)} is not set");
 
-            return $@"Data Source={DataSource};Initial Catalog={InitialCatalog};User ID={UserId};Password={Password}";
+            return $@"Data Source={DataSource};Initial Catalog={InitialCatalog};User ID={UserId};Password={Password};TrustServerCertificate=true";
         }
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PlaceHolder.Application.Services.BackgroundServices;
-using PlaceHolder.Application.Services.Cqrs.Dispatchers;
 using PlaceHolder.Application.Services.Cqrs.MediatrPipeline;
 using PlaceHolder.Application.Services.Ports.Cqrs;
 using PlaceHolder.DependencyInjection.AssemblyUtils;
@@ -19,10 +18,6 @@ namespace PlaceHolder.DependencyInjection
     {
         public static IServiceCollection AddApplicationCore(this IServiceCollection services)
         {
-            //CQRS
-            services.TryAddTransient<ICommandDispatcher, CommandDispatcher>();
-            services.TryAddTransient<IQueryDispatcher, QueryDispatcher>();
-
             var assemblies = AssemblyFinderUtil.GetApplicationCoreAssemblies();
 
             //MediatR
