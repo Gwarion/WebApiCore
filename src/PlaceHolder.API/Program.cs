@@ -40,7 +40,7 @@ builder.Services.AddOpenApiDocument(config =>
     config.PostProcess = document =>
     {
         document.Info.Version = "v1";
-        document.Info.Title = ".NET Core 6.0 WebApi";
+        document.Info.Title = ".NET Core 8.0 WebApi";
         document.Info.Description = "Uses : CQRS (Mediatr pipeline), Hexagonal Architecture and DDD";
         document.Info.Contact = new NSwag.OpenApiContact
         {

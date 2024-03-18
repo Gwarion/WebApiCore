@@ -16,10 +16,11 @@ services:
       context: .
       dockerfile: src/PlaceHolder.API/Dockerfile
     depends_on:
-        - db
-        - kafka
+    - db
+    - kafka
     ports:
-    - "55000:80"
+    - "55000:8080"
+    - "55001:8081"
 
   db:
     container_name: "SqlServer2022"
