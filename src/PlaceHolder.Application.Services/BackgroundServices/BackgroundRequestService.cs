@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PlaceHolder.Application.Services.Ports.Cqrs;
@@ -10,19 +11,18 @@ namespace PlaceHolder.Application.Services.BackgroundServices
 {
     public class BackgroundRequestService : BackgroundService
     {
-        private readonly IServiceScope _scope;
-        private readonly BackgroundRequestQueueManager _queueManager;
         private readonly ILogger _logger;
-        private readonly string _serviceName;
+        private readonly IMediator _mediator;
+
+        private readonly BackgroundRequestQueueManager _queueManager;        
+        private static readonly string _serviceName = nameof(BackgroundRequestService);
 
         public BackgroundRequestService(
-            IServiceProvider serviceProvider,
+            IMediator mediator,
             ILoggerFactory loggerFactory,
             BackgroundRequestQueueManager queueManager)
         {
-            _serviceName = nameof(BackgroundRequestService);
-
-            _scope = serviceProvider.CreateScope();
+            _mediator = mediator;
             _logger = loggerFactory.CreateLogger(_serviceName);
             _queueManager = queueManager;
         }
@@ -67,9 +67,7 @@ namespace PlaceHolder.Application.Services.BackgroundServices
         {
             try
             {
-                using var scope = _scope.ServiceProvider.CreateScope();
-                var dispatcher = scope.ServiceProvider.GetService<ICommandDispatcher>();
-                await dispatcher.DispatchAsync(command);
+                await _mediator.Send(command);
             }
             catch (Exception e)
             {

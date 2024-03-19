@@ -39,8 +39,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.DrivingAdapter.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.Utils", "src\PlaceHolder.Utils\PlaceHolder.Utils.csproj", "{A370AE01-746A-4F29-9C0F-1B310378566A}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.DrivenAdapter.KafkaProducer", "src\PlaceHolder.DrivenAdapter.KafkaProducer\PlaceHolder.DrivenAdapter.KafkaProducer.csproj", "{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{70079F37-E7CF-48BD-9A5C-5D0F7BB56D5C}"
@@ -52,6 +50,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.DrivenAdapter.SQLServer.Mock", "src\PlaceHolder.DrivenAdapter.SQLServer.Mock\PlaceHolder.DrivenAdapter.SQLServer.Mock.csproj", "{5504F45A-FD81-4F1A-BC61-F173DACB3AC3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceHolder.DrivenAdapter.KafkaProducer.Mock", "src\PlaceHolder.DrivenAdapter.KafkaProducer.Mock\PlaceHolder.DrivenAdapter.KafkaProducer.Mock.csproj", "{9CD00A6A-316D-4B47-8CE2-2F971D43CD52}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2094E1E6-9905-4874-9140-9F9818234595}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,10 +95,6 @@ Global
 		{A370AE01-746A-4F29-9C0F-1B310378566A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A370AE01-746A-4F29-9C0F-1B310378566A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A370AE01-746A-4F29-9C0F-1B310378566A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F67C0E0-F338-42F3-B8DC-CEAFF4E43DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{416F0AAF-2B95-4C4C-841D-FDA9E958FFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -115,6 +111,10 @@ Global
 		{9CD00A6A-316D-4B47-8CE2-2F971D43CD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CD00A6A-316D-4B47-8CE2-2F971D43CD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CD00A6A-316D-4B47-8CE2-2F971D43CD52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2094E1E6-9905-4874-9140-9F9818234595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2094E1E6-9905-4874-9140-9F9818234595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2094E1E6-9905-4874-9140-9F9818234595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2094E1E6-9905-4874-9140-9F9818234595}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
