@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlaceHolder.Application.Services.Ports.EF;
-using PlaceHolder.DependencyInjection;
-using System;
 
 namespace PlaceHolder.API.Managers
 

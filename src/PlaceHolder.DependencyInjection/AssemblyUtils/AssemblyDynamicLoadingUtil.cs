@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.DotNet.PlatformAbstractions;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Text;
-using Microsoft.DotNet.PlatformAbstractions;
 
 namespace PlaceHolder.DependencyInjection.AssemblyUtils
 {

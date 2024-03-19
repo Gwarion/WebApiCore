@@ -1,5 +1,5 @@
 ﻿using BoDi;
-using PlaceHolder.API.Controllers.Consumers.Dtos;
+using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.API.IntegrationTests.Utils;
 using TechTalk.SpecFlow.Assist;
 
@@ -9,31 +9,31 @@ namespace PlaceHolder.API.IntegrationTests.StepDefinitions
     public class ConsumersSteps
     {
         private IObjectContainer _container;
-        private AddressDto _addressDto;
-        private ConsumerDto _consumerDto;
+        private AddressResource _addressResource;
+        private ConsumerResource _consumerResource;
 
         public ConsumersSteps(IObjectContainer container) => _container = container;
 
-        [Given(@"the following AddressDto")]
-        public void GivenTheFollowingAddressDto(Table table)
+        [Given(@"the following Address")]
+        public void GivenTheFollowingAddress(Table table)
         {
-            _addressDto = table.CreateInstance<AddressDto>();
+            _addressResource = table.CreateInstance<AddressResource>();
         }
 
-        [Given(@"the following ConsumerDto")]
-        public void GivenTheFollowingConsumerDTO(Table table)
+        [Given(@"the following Consumer")]
+        public void GivenTheFollowingConsumer(Table table)
         {
-            _consumerDto = table.CreateInstance<ConsumerDto>();
-            _consumerDto.Address = _addressDto;
+            _consumerResource = table.CreateInstance<ConsumerResource>();
+            _consumerResource.Address = _addressResource;
 
-            _container.Resolve<HttpRequestTestTracker>().RegisterContent(_consumerDto);
+            _container.Resolve<HttpRequestTestTracker>().RegisterContent(_consumerResource);
         }
 
-        [Then(@"I Get the following ConsumerDto")]
-        public async Task ThenIGetTheFollowingData(Table table)
+        [Then(@"I Get the following Consumer")]
+        public async Task ThenIGetTheFollowingConsumer(Table table)
         {
-            var dto = table.CreateInstance<ConsumerDto>();
-            await _container.Resolve<HttpRequestTestTracker>().AssertData(dto);
+            var resource = table.CreateInstance<ConsumerResource>();
+            await _container.Resolve<HttpRequestTestTracker>().AssertData(resource);
         }
     }
 }

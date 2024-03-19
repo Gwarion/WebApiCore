@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using PlaceHolder.API.Controllers.Consumers.Resources;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using PlaceHolder.API.Controllers.Consumers.Dtos;
 
 namespace PlaceHolder.API.Controllers.Consumers
 {
     public interface IConsumerService
     {
-        Task<ConsumerDto> CreateConsumerAsync(ConsumerDto consumerDto);
-        Task<ConsumerDto> UpdateConsumerAsync(ConsumerDto consumerDto);
-        Task<ConsumerDto> GetOneByIdAsync(string guid);
-        Task<List<ConsumerDto>> GetAllAsync();
+        Task<ConsumerResource> CreateConsumerAsync(ConsumerResource consumerResource);
+        Task<ConsumerResource> UpdateConsumerAsync(ConsumerResource consumerResource);
+        Task<ConsumerResource> GetOneByIdAsync(string guid);
+        Task<List<ConsumerResource>> GetAllAsync();
     }
 }

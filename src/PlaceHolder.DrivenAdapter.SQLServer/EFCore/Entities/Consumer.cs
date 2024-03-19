@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.AbstractEntities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
 {

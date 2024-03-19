@@ -4,15 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Text;
 
 namespace PlaceHolder.DependencyInjection.AssemblyUtils
 {
     public static class AssemblyFinderUtil
     {
-        private static readonly string ApplicationAssemblyExtension = ".dll";
-        private static readonly string ApplicationDomainRootNamespace = "placeholder.domain";
-        private static readonly string ApplicationCoreRootNamespace = "placeholder.application";
+        private const string ApplicationAssemblyExtension = ".dll";
+        private const string ApplicationDomainRootNamespace = "placeholder.domain";
+        private const string ApplicationCoreRootNamespace = "placeholder.application";
 
         private static string GetApplicationPath() => AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
 

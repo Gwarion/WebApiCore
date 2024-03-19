@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace PlaceHolder.API.Controllers.Consumers.Dtos
+namespace PlaceHolder.API.Controllers.Consumers.Resources
 {
-    public class AddressDto
+    public class AddressResource
     {
         [JsonProperty("country")]
         public string Country { get; set; }

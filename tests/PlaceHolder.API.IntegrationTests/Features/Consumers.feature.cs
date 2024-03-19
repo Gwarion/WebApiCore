@@ -109,7 +109,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1 avenue de l\'europe",
                             "67000"});
 #line 4
- testRunner.Given("the following AddressDto", ((string)(null)), table1, "Given ");
+ testRunner.Given("the following Address", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
@@ -118,7 +118,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "John",
                             "Doe"});
 #line 7
- testRunner.Given("the following ConsumerDto", ((string)(null)), table2, "Given ");
+ testRunner.And("the following Consumer", ((string)(null)), table2, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Method",
@@ -142,7 +142,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "John",
                             "Doe"});
 #line 15
- testRunner.And("I Get the following ConsumerDto", ((string)(null)), table4, "And ");
+ testRunner.And("I Get the following Consumer", ((string)(null)), table4, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

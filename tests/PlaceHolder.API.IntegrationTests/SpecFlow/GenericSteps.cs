@@ -8,37 +8,42 @@ namespace PlaceHolder.API.IntegrationTests.SpecFlow
     [Binding]
     public class GenericSteps
     {
-        private IObjectContainer _container;
-        public GenericSteps(IObjectContainer container) => _container = container;
+        private readonly IObjectContainer _container;
+        private readonly HttpRequestTestTracker _tracker;
+
+        public GenericSteps(IObjectContainer container, HttpRequestTestTracker tracker)
+        {
+            _container = container;
+            _tracker = tracker;
+        }
 
         [When(@"I send the following request")]
         public async Task WhenISendTheFollowingRequest(Table table)
         {
-            var tracker = _container.Resolve<HttpRequestTestTracker>();
             try
             {
                 var request = table.CreateInstance<HttpRequestMessage>();
-                request.Content = tracker.Content;
+                request.Content = _tracker.Content;
 
                 var response = await HttpClientHelper.SendAsync(request);
-                tracker.RegisterResponse(response);
+                _tracker.RegisterResponse(response);
             }
             catch(Exception e)
             {
-                tracker.RegisterException(e);
+                _tracker.RegisterException(e);
             }
         }
 
         [Then(@"No exception occurs")]
         public void ThenNoExceptionOccurs()
         {
-            Assert.False(_container.Resolve<HttpRequestTestTracker>().ExceptionOccured);
+            Assert.False(_tracker.ExceptionOccured);
         }
 
         [Then(@"I Get the status code '([^']*)'")]
         public void ThenIGetTheStatusCode(HttpStatusCode expetedStatusCode)
         {
-            _container.Resolve<HttpRequestTestTracker>().AssertResponse(expetedStatusCode);
+            _tracker.AssertResponse(expetedStatusCode);
         }
     }
 }

@@ -12,8 +12,8 @@ namespace PlaceHolder.API.Middlewares
 {
     public class ExceptionHandlingMiddleware
     {
-        private static readonly string DefaultContentType = "application/json";
-        private static readonly string DefaultLoggerCategoryName = "PlaceHolder";
+        private const string DefaultContentType = "application/json";
+        private const string DefaultLoggerCategoryName = "PlaceHolder";
 
         private readonly RequestDelegate _next;
         private readonly ILogger _logger;
