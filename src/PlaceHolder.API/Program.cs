@@ -51,6 +51,7 @@ builder.Services.AddOpenApiDocument(config =>
 });
 
 builder.Services.AddApplicationCore();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAdapters(builder.Configuration);
 builder.Services.AddBackgroundService();
 

@@ -1,4 +1,4 @@
-﻿    using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
@@ -14,9 +14,10 @@ namespace PlaceHolder.API.IntegrationTests.Utils
     {
         private static HttpClient _httpClient { get; }
 
-        public static readonly string BaseAddress = "http://localhost:80/api/v1";
-        
-        static HttpClientHelper() => _httpClient = new PlaceHolderWebApplicationFactory<Program>().CreateClient();
+        public const string BaseAddress = "http://localhost:80/api/v1";
+
+        static HttpClientHelper()
+            => _httpClient = new PlaceHolderWebApplicationFactory<Program>().CreateClient();
 
         public static async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
             => await _httpClient.SendAsync(request);

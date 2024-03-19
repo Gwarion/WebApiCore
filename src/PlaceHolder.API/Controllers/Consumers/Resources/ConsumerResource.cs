@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
+using System;
 
-namespace PlaceHolder.API.Controllers.Consumers.Dtos
+namespace PlaceHolder.API.Controllers.Consumers.Resources
 {
     [JsonObject("consumer")]
-    public class ConsumerDto
+    public class ConsumerResource
     {
         [JsonProperty("guid")]
-        public string Guid { get; set; }
+        public Guid? Guid { get; set; }
 
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
@@ -21,6 +22,6 @@ namespace PlaceHolder.API.Controllers.Consumers.Dtos
         public string ModificationDate { get; set; }
 
         [JsonProperty("address")]
-        public AddressDto Address { get; set; }
+        public AddressResource Address { get; set; }
     }
 }

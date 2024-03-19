@@ -4,7 +4,7 @@ namespace PlaceHolder.DependencyInjection.Options
 {
     public class DatabaseOptions
     {
-        public static readonly string Position = "Database";
+        public const string Position = "Database";
 
         public string DataSource { get; set; }
         public string InitialCatalog { get; set; }

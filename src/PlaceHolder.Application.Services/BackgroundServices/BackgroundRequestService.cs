@@ -11,18 +11,18 @@ namespace PlaceHolder.Application.Services.BackgroundServices
 {
     public class BackgroundRequestService : BackgroundService
     {
+        private const string _serviceName = nameof(BackgroundRequestService);
+
         private readonly ILogger _logger;
-        private readonly IMediator _mediator;
-
+        private readonly IServiceProvider _serviceProvider;
         private readonly BackgroundRequestQueueManager _queueManager;        
-        private static readonly string _serviceName = nameof(BackgroundRequestService);
-
+        
         public BackgroundRequestService(
-            IMediator mediator,
+            IServiceProvider serviceProvider,
             ILoggerFactory loggerFactory,
             BackgroundRequestQueueManager queueManager)
         {
-            _mediator = mediator;
+            _serviceProvider = serviceProvider;
             _logger = loggerFactory.CreateLogger(_serviceName);
             _queueManager = queueManager;
         }
@@ -67,7 +67,9 @@ namespace PlaceHolder.Application.Services.BackgroundServices
         {
             try
             {
-                await _mediator.Send(command);
+                using var scope = _serviceProvider.CreateScope();
+                var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();                    
+                await mediator.Send(command);
             }
             catch (Exception e)
             {

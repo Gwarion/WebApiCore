@@ -2,12 +2,7 @@
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using System;
 
-namespace PlaceHolder.Application.Logic.Queries.Consumers
-{
-    public class GetOneConsumerByIdQuery : IQuery<Consumer>
-    {
-        public Guid Guid { get; set; }
+namespace PlaceHolder.Application.Logic.Queries.Consumers;
 
-        public GetOneConsumerByIdQuery(string guid) => Guid = Guid.Parse(guid);
-    }
-}
+public sealed record GetOneConsumerByIdQuery(Guid Guid) : IQuery<Consumer> { }
+

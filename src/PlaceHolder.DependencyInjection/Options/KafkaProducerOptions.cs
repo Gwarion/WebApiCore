@@ -2,7 +2,7 @@
 {
     public class KafkaProducerOptions
     {
-        public static readonly string Position = "KafkaProducer";
+        public const string Position = "KafkaProducer";
 
         public string BootStrapServers { get; set; }
     }

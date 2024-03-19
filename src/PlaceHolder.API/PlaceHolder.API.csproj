@@ -19,6 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="librdkafka.redist" Version="2.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
@@ -27,7 +28,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\PlaceHolder.Application.Logic\PlaceHolder.Application.Logic.csproj" />
 		<ProjectReference Include="..\PlaceHolder.DependencyInjection\PlaceHolder.DependencyInjection.csproj" />
+		<ProjectReference Include="..\PlaceHolder.Domain.Model\PlaceHolder.Domain.Model.csproj" />
 		<ProjectReference Include="..\PlaceHolder.Utils\PlaceHolder.Utils.csproj" />
 	</ItemGroup>
 

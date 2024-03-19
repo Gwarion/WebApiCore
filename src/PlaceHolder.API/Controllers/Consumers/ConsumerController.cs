@@ -1,6 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PlaceHolder.API.Controllers.Consumers.Dtos;
+using PlaceHolder.API.Controllers.Consumers.Resources;
+using PlaceHolder.Application.Logic.Commands.Consumers;
+using PlaceHolder.Application.Logic.Queries.Consumers;
+using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
+using System;
+using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
@@ -10,47 +17,53 @@ namespace PlaceHolder.API.Controllers.Consumers
     [Consumes(MediaTypeNames.Application.Json)]
     public class ConsumerController : PlaceHolderController
     {
-        private readonly IConsumerService _consumerService;
-        public ConsumerController(IConsumerService consumerService) => _consumerService = consumerService;
+        public ConsumerController(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
 
-
-        [HttpPost(Name ="CreateConsumer")]
-        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status201Created)]
+        [HttpPost(Name = "CreateConsumer")]
+        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateConsumer([FromBody] ConsumerDto consumer)
+        public async Task<IActionResult> CreateConsumer([FromBody] ConsumerResource resource)
         {
-            var result = await _consumerService.CreateConsumerAsync(consumer);
-            return new OkObjectResult(result) { StatusCode = StatusCodes.Status201Created };
+            var command = _mapper.Map<ConsumerResource, CreateConsumerCommand>(resource);
+            var res = await _mediator.Send(command);
+
+            return new CreatedResult(string.Empty, _mapper.Map<Consumer, ConsumerResource>(res));
         }
 
         [HttpPut(Name = "UpdateConsumer")]
-        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateConsumer([FromBody] ConsumerDto consumer)
+        public async Task<IActionResult> UpdateConsumer([FromBody] ConsumerResource resource)
         {
-            var result = await _consumerService.UpdateConsumerAsync(consumer);
-            return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
+            var command = _mapper.Map<ConsumerResource, UpdateConsumerCommand>(resource);
+            var res = await _mediator.Send(command);
+
+            return Ok(_mapper.Map<Consumer, ConsumerResource>(res));
         }
 
         [HttpGet("{consumerId}", Name = "GetOne")]
-        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetOneConsumer([FromRoute] string consumerId)
+        public async Task<IActionResult> GetOneConsumer([FromRoute] Guid consumerId)
         {
-            var result = await _consumerService.GetOneByIdAsync(consumerId);
-            return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
+            var query = new GetOneConsumerByIdQuery(consumerId);
+            var res = await _mediator.Send(query);
+
+            return Ok(_mapper.Map<Consumer, ConsumerResource>(res));
         }
 
         [HttpGet(Name = "GetAll")]
-        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllConsumer()
         {
-            var result = await _consumerService.GetAllAsync();
-            return new OkObjectResult(result) { StatusCode = StatusCodes.Status200OK };
+            var query = new GetAllConsumersQuery();
+            var res = await _mediator.Send(query);
+
+            return Ok(_mapper.Map<List<Consumer>, List<ConsumerResource>>(res));
         }
     }
 }
