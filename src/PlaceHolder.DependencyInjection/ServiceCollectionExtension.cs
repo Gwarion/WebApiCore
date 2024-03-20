@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using PlaceHolder.Application.Services.BackgroundServices;
 using PlaceHolder.Application.Services.Cqrs.MediatrPipeline;
 using PlaceHolder.Application.Services.Ports.Cqrs;

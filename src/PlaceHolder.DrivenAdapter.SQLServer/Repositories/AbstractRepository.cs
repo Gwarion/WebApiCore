@@ -1,7 +1,4 @@
 ﻿using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
 {

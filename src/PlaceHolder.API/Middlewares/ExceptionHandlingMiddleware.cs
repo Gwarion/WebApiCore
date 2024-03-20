@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using PlaceHolder.Domain.Model.Shared.Exceptions;
 using PlaceHolder.Utils.Exceptions;
-using PlaceHolder.Utils.Exceptions.DomainExceptions;
 using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
 using System;
 using System.Net;

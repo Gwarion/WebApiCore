@@ -10,8 +10,8 @@
 		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\ACL\ApplicationCoreToInfrastructureMap.cs" Link="_links\ApplicationCoreToInfrastructureMap.cs" />
 		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\ACL\InfrastructureToApplicationCoreMap.cs" Link="_links\InfrastructureToApplicationCoreMap.cs" />
 		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\AbstractEntities\TimeStampedEntity.cs" Link="_links\TimeStampedEntity.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\Address.cs" Link="_links\Address.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\Consumer.cs" Link="_links\Consumer.cs" />
+		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\AddressEntity.cs" Link="_links\AddressEntity.cs" />
+		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\ConsumerEntity.cs" Link="_links\ConsumerEntity.cs" />
 		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\Repositories\ConsumerRepository.cs" Link="_links\ConsumerRepository.cs" />
 	</ItemGroup>
 
@@ -23,6 +23,7 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	</ItemGroup>

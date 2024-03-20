@@ -17,13 +17,15 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             _kafkaProducer = kafkaProducer;
         }
 
-        protected override async Task<Consumer> Handle(CreateConsumerCommand request)
+        protected override async Task<Consumer> Handle(CreateConsumerCommand command)
         {
             var createdConsumer = await _consumerRepository.SaveAsync(new Consumer
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Address = request.Address
+                FirstName = command.FirstName,
+                LastName = command.LastName,
+                Address = command.Address,
+                Email = command.Email,
+                PhoneNumber = command.PhoneNumber
             });
 
             await _kafkaProducer.ProduceAsync(new ConsumerCreatedEvent(createdConsumer));

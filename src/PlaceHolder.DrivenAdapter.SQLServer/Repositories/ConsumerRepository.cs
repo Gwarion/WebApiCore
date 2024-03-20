@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
+using PlaceHolder.Domain.Model.Shared.Exceptions;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
-using PlaceHolder.Utils.Exceptions.DomainExceptions;
+using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DbConsumer = PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.Consumer;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
 {
@@ -20,34 +20,34 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
 
         public async Task<Consumer> SaveAsync(Consumer consumer)
         {
-            var dbConsumer = _mapper.Map<Consumer, DbConsumer>(consumer);
-            var entry = _context.Consumers.Add(dbConsumer);
+            var dbConsumer = _mapper.Map<Consumer, ConsumerEntity>(consumer);
+            var entry = await _context.Consumers.AddAsync(dbConsumer);
 
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<DbConsumer, Consumer>(entry.Entity);
+            return _mapper.Map<ConsumerEntity, Consumer>(entry.Entity);
         }
 
         public async Task<Consumer> UpdateAsync(Consumer consumer)
         {
-            var dbConsumer = _mapper.Map<Consumer, DbConsumer>(consumer);
+            var dbConsumer = _mapper.Map<Consumer, ConsumerEntity>(consumer);
             var entry = _context.Consumers.Update(dbConsumer);
 
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<DbConsumer, Consumer>(entry.Entity);
+            return _mapper.Map<ConsumerEntity, Consumer>(entry.Entity);
         }
 
         public async Task<Consumer> GetOneByIdAsync(Guid guid)
         {
-            var dbConsumer = await _context.Consumers
+            var consumer = await _context.Consumers
                 .AsNoTracking()
                 .Include(c => c.Address)
                 .SingleOrDefaultAsync(c => c.Guid == guid);
 
-            return dbConsumer != null 
-                ? _mapper.Map<DbConsumer, Consumer>(dbConsumer)
-                : throw new NotFoundException($"No consumer with id : {guid}");
+            return consumer != null 
+                ? _mapper.Map<ConsumerEntity, Consumer>(consumer)
+                : throw new NotFoundException(guid);
         }
 
         public async Task<List<Consumer>> GetAllAsync()
