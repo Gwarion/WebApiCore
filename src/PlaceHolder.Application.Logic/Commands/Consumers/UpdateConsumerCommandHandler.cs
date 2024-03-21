@@ -17,17 +17,19 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             _kafkaProducer = kafkaProducer;
         }
 
-        protected override async Task<Consumer> Handle(UpdateConsumerCommand request)
+        protected override async Task<Consumer> Handle(UpdateConsumerCommand command)
         {
-            var consumer = await _consumerRepository.GetOneByIdAsync(request.Guid);
+            var consumer = await _consumerRepository.GetOneByIdAsync(command.Guid);
 
-            consumer.FirstName = request.FirstName;
-            consumer.LastName = request.LastName;
+            consumer.FirstName = command.FirstName;
+            consumer.LastName = command.LastName;
+            consumer.Email = command.Email;
+            consumer.PhoneNumber = command.PhoneNumber;
 
-            consumer.Address.City = request.Address.City;
-            consumer.Address.Street = request.Address.Street;
-            consumer.Address.Country = request.Address.Country;
-            consumer.Address.PostalCode = request.Address.PostalCode;
+            consumer.Address.City = command.Address.City;
+            consumer.Address.Street = command.Address.Street;
+            consumer.Address.Country = command.Address.Country;
+            consumer.Address.PostalCode = command.Address.PostalCode;
 
             var updatedConsumer = await _consumerRepository.UpdateAsync(consumer);
 

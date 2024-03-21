@@ -4,5 +4,11 @@ using System;
 
 namespace PlaceHolder.Application.Logic.Commands.Consumers;
 
-public sealed record UpdateConsumerCommand(Guid Guid, string FirstName, string LastName, Address Address)
+public sealed record UpdateConsumerCommand(
+    Guid Guid,
+    string FirstName,
+    string LastName,
+    string Email,
+    string PhoneNumber,
+    Address Address)
     : ICommand<Consumer> { }

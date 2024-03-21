@@ -1,5 +1,4 @@
 ﻿using PlaceHolder.Domain.SeedWork.Kafka;
-using System;
 
 namespace PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.Events
 {

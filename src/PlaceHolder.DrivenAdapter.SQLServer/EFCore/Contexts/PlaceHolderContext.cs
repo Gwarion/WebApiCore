@@ -3,9 +3,7 @@ using PlaceHolder.Application.Services.Ports.EF;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.AbstractEntities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +11,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
 {
     public class PlaceHolderContext : DbContext, IDbContext
     {
-        public DbSet<Consumer> Consumers { get; set; }
+        public DbSet<ConsumerEntity> Consumers { get; set; }
         public PlaceHolderContext(DbContextOptions options) : base(options) { }
 
         public void Migrate() => this.Database.Migrate();
@@ -43,9 +41,9 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
         {
             try
             {
-                await this.Database.BeginTransactionAsync();
+                using var transaction = await this.Database.BeginTransactionAsync();
                 var result = await transactionalAction();
-                await this.Database.CommitTransactionAsync();
+                await transaction.CommitAsync();
 
                 return result;
             }
