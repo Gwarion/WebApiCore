@@ -4,21 +4,14 @@ WORKDIR /app
 EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-COPY ["src/PlaceHolder.API/PlaceHolder.API.csproj", "src/PlaceHolder.API/"]
-COPY ["src/PlaceHolder.DependencyInjection/PlaceHolder.DependencyInjection.csproj", "src/PlaceHolder.DependencyInjection/"]
-COPY ["src/PlaceHolder.Application.Services/PlaceHolder.Application.Services.csproj", "src/PlaceHolder.Application.Services/"]
-COPY ["src/PlaceHolder.Domain.SeedWork/PlaceHolder.Domain.SeedWork.csproj", "src/PlaceHolder.Domain.SeedWork/"]
-COPY ["src/PlaceHolder.Utils/PlaceHolder.Utils.csproj", "src/PlaceHolder.Utils/"]
-RUN dotnet restore "src/PlaceHolder.API/PlaceHolder.API.csproj"
-COPY . .
-WORKDIR "/src/src/PlaceHolder.API"
-RUN dotnet build "PlaceHolder.API.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "PlaceHolder.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+WORKDIR /build
+COPY src/ .
 
-FROM base AS final
+RUN dotnet publish "PlaceHolder.API.csproj" -c Release -o dist
+
+FROM base AS run
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /build/dist .
+
 ENTRYPOINT ["dotnet", "PlaceHolder.API.dll"]

@@ -13,7 +13,8 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
         public async Task<T> ExecuteAsTransaction<T>(Func<Task<T>> action) => await action();
         public void Migrate() { return; }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
+        public override Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = default)
         {
             var now = DateTime.Now;

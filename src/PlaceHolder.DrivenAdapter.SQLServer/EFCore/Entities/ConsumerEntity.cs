@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.AbstractEntities;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
@@ -26,21 +27,21 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
 
                 builder.ToTable("Consumer");
 
-                builder.HasOne(c => c.Address)
-                    .WithOne(a => a.Consumer)
-                    .HasForeignKey<AddressEntity>(a => a.ConsumerId)
+                builder.HasOne(consumer => consumer.Address)
+                    .WithOne()
+                    .HasForeignKey<AddressEntity>(address => address.ConsumerId)
                     .IsRequired();
 
-                builder.Property(c => c.FirstName)
+                builder.Property(consumer => consumer.FirstName)
                     .HasMaxLength(50);
 
-                builder.Property(c => c.LastName)
+                builder.Property(consumer => consumer.LastName)
                     .HasMaxLength(50);
 
-                builder.Property(c => c.PhoneNumber)
+                builder.Property(consumer => consumer.PhoneNumber)
                     .HasMaxLength(12);
     
-                builder.Property(c => c.Email)
+                builder.Property(consumer => consumer.Email)
                     .HasMaxLength(100);
             }
         }

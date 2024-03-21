@@ -8,7 +8,10 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.ACL
     {
         public InfrastructureToApplicationCoreMap()
         {
-            CreateMap<ConsumerEntity, Consumer>();
+            CreateMap<ConsumerEntity, Consumer>()
+                .ForMember(d => d.Email, opts => opts.Ignore())
+                .ForMember(d => d.PhoneNumber, opts => opts.Ignore());
+
             CreateMap<AddressEntity, Address>();
         }
     }
