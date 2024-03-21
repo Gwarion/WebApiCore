@@ -2,10 +2,7 @@
   "profiles": {
     "Docker Compose": {
       "commandName": "DockerCompose",
-      "commandVersion": "1.0",
-      "serviceActions": {
-        "placeholder.api": "StartDebugging"
-      }
+      "commandVersion": "1.0"
     }
   }
 }

@@ -25,6 +25,7 @@
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(ConfigurationName) == Debug">
 		<Exec Command="copy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(TargetDir)..\..\..\..\Build\Debug&quot;" />
+		<Exec Command="copy /y /d &quot;$(TargetDir)*.pdb&quot; &quot;$(TargetDir)..\..\..\..\Build\Debug&quot;" />
 	</Target>
 
 </Project>

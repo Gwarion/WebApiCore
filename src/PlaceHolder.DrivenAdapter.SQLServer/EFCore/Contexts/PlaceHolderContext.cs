@@ -15,7 +15,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
         public PlaceHolderContext(DbContextOptions options) : base(options) { }
 
         public void Migrate() => this.Database.Migrate();
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlaceHolderContext).Assembly);
@@ -37,25 +37,27 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
-        public async Task<T> ExecuteAsTransaction<T>(Func<Task<T>> transactionalAction)
+        public async Task<T> ExecuteAsTransaction<T>(Func<Task<T>> transactionalCommand)
         {
-            try
+            var strategy = Database.CreateExecutionStrategy();
+
+            return await strategy.ExecuteAsync(async () =>
             {
                 using var transaction = await this.Database.BeginTransactionAsync();
-                var result = await transactionalAction();
-                await transaction.CommitAsync();
 
-                return result;
-            }
-            catch
-            {
-                if(this.Database?.CurrentTransaction?.TransactionId != null)
+                try
                 {
-                    this.Database.RollbackTransaction();
-                }
+                    var result = await transactionalCommand();
+                    await transaction.CommitAsync();
 
-                throw;
-            }   
+                    return result;
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            });
         }
     }
 }

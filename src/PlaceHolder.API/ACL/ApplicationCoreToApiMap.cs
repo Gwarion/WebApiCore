@@ -12,9 +12,9 @@ namespace PlaceHolder.DrivingAdapter.WebApi.ACL
 
             CreateMap<Consumer, ConsumerResource>()
                 .ForMember(destination => destination.Email,
-                    opts => opts.MapFrom(source => (string)source.Email))
+                    opts => opts.Ignore())
                 .ForMember(destination => destination.PhoneNumber,
-                    opts => opts.MapFrom(source => (string)source.PhoneNumber));
+                    opts => opts.Ignore());
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     /// <inheritdoc />
-    public partial class CREATE_CONSUMER_AND_ADDRESS : Migration
+    public partial class INITIAL_MIGRATION : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,8 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,8 +38,8 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                     Street = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     PostalCode = table.Column<int>(type: "int", maxLength: 6, nullable: false),
                     ConsumerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

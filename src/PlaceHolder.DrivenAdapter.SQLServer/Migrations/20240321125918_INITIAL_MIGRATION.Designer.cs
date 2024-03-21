@@ -12,8 +12,8 @@ using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
 {
     [DbContext(typeof(PlaceHolderContext))]
-    [Migration("20240321000256_CREATE_CONSUMER_AND_ADDRESS")]
-    partial class CREATE_CONSUMER_AND_ADDRESS
+    [Migration("20240321125918_INITIAL_MIGRATION")]
+    partial class INITIAL_MIGRATION
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,10 +42,12 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("CreationDate")
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ModificationDate")
+                    b.Property<DateTime>("ModificationDate")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PostalCode")
@@ -70,7 +72,8 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreationDate")
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -85,7 +88,8 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("ModificationDate")
+                    b.Property<DateTime>("ModificationDate")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")

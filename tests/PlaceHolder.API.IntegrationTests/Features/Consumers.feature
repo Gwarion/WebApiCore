@@ -5,8 +5,8 @@ Scenario: CreateConsumer should create one consumer
 		| Country | City       | Street               | PostalCode |
 		| France  | Strasbourg | 1 avenue de l'europe | 67000      |
 	And the following Consumer
-		| FirstName | lastName |
-		| John      | Doe      |
+		| FirstName | LastName | Email        | PhoneNumber  |
+		| John      | Doe      | test@test.fr | +33600000001 |
 	When I send the following request
 		| Method | RequestUri |
 		| POST   | Consumer   |

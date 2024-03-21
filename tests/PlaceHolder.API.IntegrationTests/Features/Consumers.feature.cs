@@ -113,10 +113,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
-                            "lastName"});
+                            "LastName",
+                            "Email",
+                            "PhoneNumber"});
                 table2.AddRow(new string[] {
                             "John",
-                            "Doe"});
+                            "Doe",
+                            "test@test.fr",
+                            "+33600000001"});
 #line 7
  testRunner.And("the following Consumer", ((string)(null)), table2, "And ");
 #line hidden
