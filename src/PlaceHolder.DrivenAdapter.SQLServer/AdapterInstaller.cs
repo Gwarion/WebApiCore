@@ -7,7 +7,9 @@ using PlaceHolder.DependencyInjection;
 using PlaceHolder.DependencyInjection.Options;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
+using PlaceHolder.DrivenAdapter.SQLServer.QueryRepositories;
 using PlaceHolder.DrivenAdapter.SQLServer.Repositories;
+using PlaceHolder.QueryModel.Consumers;
 using System;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer
@@ -35,11 +37,13 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
                             errorNumbersToAdd: null);
                     });
             });
+            services.AddScoped<IDbContext, PlaceHolderContext>();
 
             services.AddAutoMapper(GetType().Assembly);
 
             services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
-            services.AddScoped<IDbContext, PlaceHolderContext>();
+
+            services.TryAddTransient<IConsumerQueryRepository, ConsumerQueryRepository>();
         }
     }
 }

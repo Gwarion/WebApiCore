@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ab058a23-bd72-4fb4-a78d-7762da0980d6",
+		"_postman_id": "ed060a68-ba0c-4274-be00-0b4a599517bd",
 		"name": "WebApiCore",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20587230"
@@ -33,7 +33,8 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -84,7 +85,8 @@
 									"    pm.response.to.be.json;\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -93,7 +95,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"guid\": \"{{Guid}}\",\r\n    \"firstName\": \"UpdatedFirstName\",\r\n    \"lastName\": \"UpdatedLastName\",\r\n    \"email\": \"my.updated.email@test.com\",\r\n    \"phoneNumber\": \"+33600000002\",\r\n    \"address\": {\r\n        \"country\": \"UpdatedCountry\",\r\n        \"city\": \"UpdatedCity\",\r\n        \"street\": \"UpdatedSteet\",\r\n        \"postalCode\": 99999\r\n    }\r\n}",
+							"raw": "{\r\n    \"firstName\": \"UpdatedFirstName\",\r\n    \"lastName\": \"UpdatedLastName\",\r\n    \"email\": \"my.updated.email@test.com\",\r\n    \"phoneNumber\": \"+33600000002\",\r\n    \"address\": {\r\n        \"country\": \"UpdatedCountry\",\r\n        \"city\": \"UpdatedCity\",\r\n        \"street\": \"UpdatedSteet\",\r\n        \"postalCode\": 99999\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -101,7 +103,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:55000/api/v1/Consumer/",
+							"raw": "http://localhost:55000/api/v1/Consumer/{{Guid}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -111,7 +113,7 @@
 								"api",
 								"v1",
 								"Consumer",
-								""
+								"{{Guid}}"
 							]
 						}
 					},
@@ -136,7 +138,8 @@
 									"    pm.response.to.be.json;\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],

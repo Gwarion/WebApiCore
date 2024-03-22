@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PlaceHolder.Application.Logic.Commands.Consumers
 {
-    public class UpdateConsumerCommandHandler : AbstractCommandHandler<UpdateConsumerCommand, Consumer>
+    public class UpdateConsumerCommandHandler : AbstractCommandHandler<UpdateConsumerCommand>
     {
         private readonly IConsumerRepository _consumerRepository;
         private readonly IKafkaProducer _kafkaProducer;
@@ -17,9 +17,9 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             _kafkaProducer = kafkaProducer;
         }
 
-        protected override async Task<Consumer> Handle(UpdateConsumerCommand command)
+        protected override async Task Handle(UpdateConsumerCommand command)
         {
-            var consumer = await _consumerRepository.GetOneByIdAsync(command.Guid);
+            var consumer = await _consumerRepository.GetOneByIdAsync(command.ConsumerId);
 
             consumer.FirstName = command.FirstName;
             consumer.LastName = command.LastName;
@@ -34,8 +34,6 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             var updatedConsumer = await _consumerRepository.UpdateAsync(consumer);
 
             await _kafkaProducer.ProduceAsync(new ConsumerUpdatedEvent(updatedConsumer));
-
-            return updatedConsumer;
         }
     }
 }

@@ -6,6 +6,6 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
     {
         protected PlaceHolderContext _context;
 
-        public AbstractRepository(PlaceHolderContext context) => _context = context;
+        protected AbstractRepository(PlaceHolderContext context) => _context = context;
     }
 }

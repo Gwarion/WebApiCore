@@ -1,5 +1,6 @@
 ﻿using PlaceHolder.Application.Services.Ports.Cqrs;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
+using System;
 
 namespace PlaceHolder.Application.Logic.Commands.Consumers;
 
@@ -9,5 +10,5 @@ public sealed record CreateConsumerCommand(
     string Email,
     string PhoneNumber,
     Address Address)
-    : ICommand<Consumer>{ }
+    : ICommand<Guid> { }
 

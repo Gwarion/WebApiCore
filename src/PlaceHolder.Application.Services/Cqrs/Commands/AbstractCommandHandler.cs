@@ -12,4 +12,12 @@ namespace PlaceHolder.Application.Services.Cqrs.Commands
         
         protected abstract Task<TResult> Handle(TRequest request);
     }
+
+    public abstract class AbstractCommandHandler<TRequest> : IRequestHandler<TRequest>
+        where TRequest : ICommand
+    {
+        Task IRequestHandler<TRequest>.Handle(TRequest request, CancellationToken cancellationToken) => Handle(request);
+
+        protected abstract Task Handle(TRequest request);
+    }
 }

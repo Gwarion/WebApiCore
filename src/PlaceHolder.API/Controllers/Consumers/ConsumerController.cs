@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.Application.Logic.Commands.Consumers;
-using PlaceHolder.Application.Logic.Queries.Consumers;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
+using PlaceHolder.QueryModel.Consumers;
 using System;
-using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
@@ -17,53 +16,53 @@ namespace PlaceHolder.API.Controllers.Consumers
     [Consumes(MediaTypeNames.Application.Json)]
     public class ConsumerController : PlaceHolderController
     {
-        public ConsumerController(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
+        private readonly IConsumerQueryRepository _queryRepository;
+
+        public ConsumerController(IMediator mediator, IMapper mapper, IConsumerQueryRepository queryRepository) 
+            : base(mediator, mapper) 
+                => _queryRepository = queryRepository;
 
         [HttpPost(Name = "CreateConsumer")]
-        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateConsumer([FromBody] ConsumerResource resource)
         {
             var command = _mapper.Map<ConsumerResource, CreateConsumerCommand>(resource);
-            var res = await _mediator.Send(command);
+            var consumerId  = await _mediator.Send(command);
 
-            return new CreatedResult(string.Empty, _mapper.Map<Consumer, ConsumerResource>(res));
+            return new CreatedResult(string.Empty, await _queryRepository.GetOneByIdAsync(consumerId));
         }
 
-        [HttpPut(Name = "UpdateConsumer")]
-        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status201Created)]
+        [HttpPut("{consumerId}", Name = "UpdateConsumer")]
+        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateConsumer([FromBody] ConsumerResource resource)
+        public async Task<IActionResult> UpdateConsumer([FromRoute] Guid consumerId, [FromBody] ConsumerResource resource)
         {
             var command = _mapper.Map<ConsumerResource, UpdateConsumerCommand>(resource);
-            var res = await _mediator.Send(command);
+            command.ConsumerId = consumerId;
 
-            return Ok(_mapper.Map<Consumer, ConsumerResource>(res));
+            await _mediator.Send(command);
+
+            return Ok(await _queryRepository.GetOneByIdAsync(consumerId));
         }
 
         [HttpGet("{consumerId}", Name = "GetOne")]
-        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BadRequestResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetOneConsumer([FromRoute] Guid consumerId)
         {
-            var query = new GetOneConsumerByIdQuery(consumerId);
-            var res = await _mediator.Send(query);
-
-            return Ok(_mapper.Map<Consumer, ConsumerResource>(res));
+            return Ok(await _queryRepository.GetOneByIdAsync(consumerId));
         }
 
         [HttpGet(Name = "GetAll")]
         [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllConsumer()
+        public async Task<IActionResult> GetAllConsumer([FromQuery] int limit = 10)
         {
-            var query = new GetAllConsumersQuery();
-            var res = await _mediator.Send(query);
-
-            return Ok(_mapper.Map<List<Consumer>, List<ConsumerResource>>(res));
+            return Ok(await _queryRepository.GetAllAsync(limit));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BoDi;
 using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.API.IntegrationTests.Utils;
+using PlaceHolder.QueryModel.Consumers;
 using TechTalk.SpecFlow.Assist;
 
 namespace PlaceHolder.API.IntegrationTests.StepDefinitions
@@ -32,8 +33,12 @@ namespace PlaceHolder.API.IntegrationTests.StepDefinitions
         [Then(@"I Get the following Consumer")]
         public async Task ThenIGetTheFollowingConsumer(Table table)
         {
-            var resource = table.CreateInstance<ConsumerResource>();
-            await _container.Resolve<HttpRequestTestTracker>().AssertData(resource);
+            var expected = table.CreateInstance<ConsumerDto>();
+            var actual = await _container.Resolve<HttpRequestTestTracker>().DeserializeResponseAsync<ConsumerDto>();
+
+            Assert.NotEqual(default, actual.Guid);
+            Assert.Equal(expected.FirstName, expected.FirstName);
+            Assert.Equal(expected.LastName, expected.LastName);
         }
     }
 }

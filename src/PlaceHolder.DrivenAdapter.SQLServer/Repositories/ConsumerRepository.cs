@@ -5,8 +5,6 @@ using PlaceHolder.Domain.Model.Shared.Exceptions;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
@@ -37,7 +35,6 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
 
             return _mapper.Map<ConsumerEntity, Consumer>(entry.Entity);
         }
-
         public async Task<Consumer> GetOneByIdAsync(Guid guid)
         {
             var consumer = await _context.Consumers
@@ -45,22 +42,9 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
                 .Include(c => c.Address)
                 .SingleOrDefaultAsync(c => c.Guid == guid);
 
-            return consumer != null 
-                ? _mapper.Map<ConsumerEntity, Consumer>(consumer)
-                : throw new NotFoundException(guid);
-        }
+            if (consumer is null) throw new NotFoundException(guid);
 
-        public async Task<List<Consumer>> GetAllAsync()
-        {
-            return await _context.Consumers
-                .AsNoTracking()
-                .Select(dbConsumer => new Consumer
-                {
-                    Guid = dbConsumer.Guid,
-                    FirstName = dbConsumer.FirstName,
-                    LastName = dbConsumer.LastName
-                })
-                .ToListAsync();
+            return _mapper.Map<ConsumerEntity, Consumer>(consumer);
         }
     }
 }

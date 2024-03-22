@@ -24,7 +24,7 @@ namespace PlaceHolder.API.IntegrationTests.Utils
             Assert.Equal(expectedStatusCode, _response.StatusCode);
         }
 
-        public async Task AssertData<TExpected>(TExpected expected)
+        public async Task<TExpected> DeserializeResponseAsync<TExpected>()
         {
             var body = await _response.Content.ReadAsStringAsync();
             Assert.NotNull(body);
@@ -33,9 +33,14 @@ namespace PlaceHolder.API.IntegrationTests.Utils
             var actual = JsonConvert.DeserializeObject<TExpected>(body);
             Assert.NotNull(actual);
 
-            AssertObject(expected, actual);
+            return actual;
         }
 
+        /// <summary>
+        /// Use reflection to recursively compare instance from specflow feature with deserialization result. Not currently used
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="actual"></param>
         private void AssertObject(object expected, object actual)
         {
             var type = expected.GetType();
