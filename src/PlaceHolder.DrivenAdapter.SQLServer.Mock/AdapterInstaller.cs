@@ -6,7 +6,9 @@ using PlaceHolder.Application.Services.Ports.EF;
 using PlaceHolder.DependencyInjection;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
+using PlaceHolder.DrivenAdapter.SQLServer.QueryRepositories;
 using PlaceHolder.DrivenAdapter.SQLServer.Repositories;
+using PlaceHolder.QueryModel.Consumers;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.Mock
 {
@@ -18,10 +20,13 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Mock
             (
                 options => options.UseInMemoryDatabase("TestDB")
             );
+            services.AddScoped<IDbContext, PlaceHolderContext>();
 
             services.AddAutoMapper(GetType().Assembly);
+
             services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
-            services.AddScoped<IDbContext, PlaceHolderContext>();
+
+            services.TryAddTransient<IConsumerQueryRepository, ConsumerQueryRepository>();
         }
     }
 }

@@ -2,11 +2,12 @@
 using PlaceHolder.Application.Services.Ports.Kafka;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.Events;
+using System;
 using System.Threading.Tasks;
 
 namespace PlaceHolder.Application.Logic.Commands.Consumers
 {
-    public class CreateConsumerCommandHandler : AbstractCommandHandler<CreateConsumerCommand, Consumer>
+    public class CreateConsumerCommandHandler : AbstractCommandHandler<CreateConsumerCommand, Guid>
     {
         private readonly IConsumerRepository _consumerRepository;
         private readonly IKafkaProducer _kafkaProducer;
@@ -17,7 +18,7 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
             _kafkaProducer = kafkaProducer;
         }
 
-        protected override async Task<Consumer> Handle(CreateConsumerCommand command)
+        protected override async Task<Guid> Handle(CreateConsumerCommand command)
         {
             var createdConsumer = await _consumerRepository.SaveAsync(new Consumer
             {
@@ -30,7 +31,7 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
 
             await _kafkaProducer.ProduceAsync(new ConsumerCreatedEvent(createdConsumer));
 
-            return createdConsumer;
+            return createdConsumer.Guid;
         }
     }
 }

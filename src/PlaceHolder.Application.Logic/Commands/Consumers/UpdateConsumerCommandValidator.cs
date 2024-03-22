@@ -14,11 +14,11 @@ namespace PlaceHolder.Application.Logic.Commands.Consumers
                 .NotEmpty()
                 .WithMessage(command => $"{nameof(command.LastName)} must be set");
 
-            RuleFor(command => command.Guid)
+            RuleFor(command => command.ConsumerId)
                 .NotEmpty()
-                .WithMessage(command => $"{nameof(command.Guid)} must be set")
+                .WithMessage(command => $"{nameof(command.ConsumerId)} must be set")
                 .Must(guid => guid != default)
-                .WithMessage(command => $"{nameof(command.Guid)} must be set");
+                .WithMessage(command => $"{nameof(command.ConsumerId)} must be set");
         }
     }
 }

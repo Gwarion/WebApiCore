@@ -7,17 +7,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\ACL\ApplicationCoreToInfrastructureMap.cs" Link="_links\ApplicationCoreToInfrastructureMap.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\ACL\InfrastructureToApplicationCoreMap.cs" Link="_links\InfrastructureToApplicationCoreMap.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\AbstractEntities\TimeStampedEntity.cs" Link="_links\TimeStampedEntity.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\AddressEntity.cs" Link="_links\AddressEntity.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\ConsumerEntity.cs" Link="_links\ConsumerEntity.cs" />
-		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\Repositories\ConsumerRepository.cs" Link="_links\ConsumerRepository.cs" />
+		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\ACL\**\*.*" LinkBase="_links\ACL" />
+		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\EFCore\Entities\**\*.*" LinkBase="_links\Entities" />
+		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\Repositories\**\*.*" LinkBase="_links\Repositories" />
+		<Compile Include="..\PlaceHolder.DrivenAdapter.SQLServer\QueryRepositories\**\*.*" Link="_links\QueryRepositories.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\PlaceHolder.DependencyInjection\PlaceHolder.DependencyInjection.csproj" />
 		<ProjectReference Include="..\PlaceHolder.Domain.Model\PlaceHolder.Domain.Model.csproj" />
+		<ProjectReference Include="..\PlaceHolder.QueryModel\PlaceHolder.QueryModel.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

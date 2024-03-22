@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.AbstractEntities;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
 {
@@ -14,11 +12,10 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
         public string Street { get; set; }
         public int PostalCode { get; set; }
 
-        #region navigation properties
-
+        /// <summary>
+        /// Consumer foreign key
+        /// </summary>
         public Guid ConsumerId { get; set; }
-        
-        #endregion
 
         internal class AddressEntityConfiguration : TimeStampedEntityConfiguration<AddressEntity>
         {
@@ -29,7 +26,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
                 builder.ToTable("Address");
 
                 builder.Property(address => address.Street)
-                .HasMaxLength(250);
+                    .HasMaxLength(250);
 
                 builder.Property(address => address.City)
                     .HasMaxLength(100);

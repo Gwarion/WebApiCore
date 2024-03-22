@@ -4,9 +4,9 @@ using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.ACL
 {
-    public class ApplicationCoreToInfrastructureMap : Profile
+    public class DomainModelToInfrastructureMap : Profile
     {
-        public ApplicationCoreToInfrastructureMap()
+        public DomainModelToInfrastructureMap()
         {
             CreateMap<Consumer, ConsumerEntity>()
                 .ForMember(destination => destination.Email, 

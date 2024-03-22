@@ -4,13 +4,13 @@ using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.ACL
 {
-    public class InfrastructureToApplicationCoreMap : Profile
+    public class InfrastructureToDomainModelMap : Profile
     {
-        public InfrastructureToApplicationCoreMap()
+        public InfrastructureToDomainModelMap()
         {
             CreateMap<ConsumerEntity, Consumer>()
-                .ForMember(d => d.Email, opts => opts.Ignore())
-                .ForMember(d => d.PhoneNumber, opts => opts.Ignore());
+                .ForMember(destination => destination.Email, opts => opts.Ignore())
+                .ForMember(destination => destination.PhoneNumber, opts => opts.Ignore());
 
             CreateMap<AddressEntity, Address>();
         }

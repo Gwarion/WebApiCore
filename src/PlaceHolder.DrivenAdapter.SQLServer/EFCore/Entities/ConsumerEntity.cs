@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities.AbstractEntities;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities
