@@ -98,55 +98,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Country",
-                            "City",
-                            "Street",
-                            "PostalCode"});
-                table1.AddRow(new string[] {
-                            "France",
-                            "Strasbourg",
-                            "1 avenue de l\'europe",
-                            "67000"});
 #line 4
- testRunner.Given("the following Address", ((string)(null)), table1, "Given ");
+ testRunner.Given("A Consumer with an address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "LastName",
-                            "Email",
-                            "PhoneNumber"});
-                table2.AddRow(new string[] {
-                            "John",
-                            "Doe",
-                            "test@test.fr",
-                            "+33600000001"});
-#line 7
- testRunner.And("the following Consumer", ((string)(null)), table2, "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Method",
                             "RequestUri"});
-                table3.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             "POST",
                             "Consumer"});
-#line 10
- testRunner.When("I send the following request", ((string)(null)), table3, "When ");
+#line 5
+ testRunner.When("I send the following request", ((string)(null)), table1, "When ");
 #line hidden
-#line 13
+#line 8
  testRunner.Then("No exception occurs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 14
- testRunner.And("I Get the status code \'201\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 9
+ testRunner.And("I get the status code \'201\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "lastName"});
-                table4.AddRow(new string[] {
-                            "John",
-                            "Doe"});
-#line 15
- testRunner.And("I Get the following Consumer", ((string)(null)), table4, "And ");
+#line 10
+ testRunner.And("I get the consumer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

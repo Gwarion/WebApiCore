@@ -40,7 +40,7 @@ namespace PlaceHolder.API.IntegrationTests.SpecFlow
             Assert.False(_tracker.ExceptionOccured);
         }
 
-        [Then(@"I Get the status code '([^']*)'")]
+        [Then(@"I get the status code '([^']*)'")]
         public void ThenIGetTheStatusCode(HttpStatusCode expetedStatusCode)
         {
             _tracker.AssertResponse(expetedStatusCode);

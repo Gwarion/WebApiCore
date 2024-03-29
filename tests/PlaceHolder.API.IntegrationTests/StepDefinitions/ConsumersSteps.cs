@@ -2,7 +2,6 @@
 using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.API.IntegrationTests.Utils;
 using PlaceHolder.QueryModel.Consumers;
-using TechTalk.SpecFlow.Assist;
 
 namespace PlaceHolder.API.IntegrationTests.StepDefinitions
 {
@@ -15,30 +14,40 @@ namespace PlaceHolder.API.IntegrationTests.StepDefinitions
 
         public ConsumersSteps(IObjectContainer container) => _container = container;
 
-        [Given(@"the following Address")]
-        public void GivenTheFollowingAddress(Table table)
+        [Given(@"A Consumer with an address")]
+        public void GivenAConsumerWithAnAddress()
         {
-            _addressResource = table.CreateInstance<AddressResource>();
-        }
-
-        [Given(@"the following Consumer")]
-        public void GivenTheFollowingConsumer(Table table)
-        {
-            _consumerResource = table.CreateInstance<ConsumerResource>();
-            _consumerResource.Address = _addressResource;
+            _consumerResource = new()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "test@test.fr",
+                PhoneNumber = "+33600000001",
+                Address = new()
+                {
+                    Street = "1 rue du test",
+                    PostalCode = 67000,
+                    City = "TestCity",
+                    Country = "TestCountry"
+                }
+            };
 
             _container.Resolve<HttpRequestTestTracker>().RegisterContent(_consumerResource);
         }
 
-        [Then(@"I Get the following Consumer")]
-        public async Task ThenIGetTheFollowingConsumer(Table table)
+        [Then(@"I get the consumer")]
+        public async Task ThenIGetTheConsumer()
         {
-            var expected = table.CreateInstance<ConsumerDto>();
             var actual = await _container.Resolve<HttpRequestTestTracker>().DeserializeResponseAsync<ConsumerDto>();
 
             Assert.NotEqual(default, actual.Guid);
-            Assert.Equal(expected.FirstName, expected.FirstName);
-            Assert.Equal(expected.LastName, expected.LastName);
+            Assert.Equal(_consumerResource.FirstName, actual.FirstName);
+            Assert.Equal(_consumerResource.LastName, actual.LastName);
+            Assert.Equal(_consumerResource.Email, actual.Email);
+            Assert.Equal(_consumerResource.PhoneNumber, actual.PhoneNumber);
+
+            var address = _consumerResource.Address;
+            Assert.Equal($"{address.Street}, {address.PostalCode} {address.City} ({address.Country.ToUpper()})", actual.Address);
         }
     }
 }
