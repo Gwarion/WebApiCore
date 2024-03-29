@@ -21,7 +21,6 @@
 		<ProjectReference Include="..\PlaceHolder.DependencyInjection\PlaceHolder.DependencyInjection.csproj" />
 		<ProjectReference Include="..\PlaceHolder.Domain.Model\PlaceHolder.Domain.Model.csproj" />
 		<ProjectReference Include="..\PlaceHolder.QueryModel\PlaceHolder.QueryModel.csproj" />
-		<ProjectReference Include="..\PlaceHolder.Utils\PlaceHolder.Utils.csproj" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(ConfigurationName) == Debug">

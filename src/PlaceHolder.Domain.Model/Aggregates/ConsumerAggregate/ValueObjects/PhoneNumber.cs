@@ -4,16 +4,17 @@ using System.Text.RegularExpressions;
 
 namespace PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.ValueObjects
 {
-    public class PhoneNumber : ValueObject
+    public partial class PhoneNumber : ValueObject
     {
-        private const string PhoneNumberPattern = @"^(0|\+\d{2})\d{9}$";
+        [GeneratedRegex(@"^(0|\+\d{2})\d{9}$")]
+        private static partial Regex PhoneNumberRegex();
 
         private string _phoneNumber;
         public override string Value => _phoneNumber;
 
         public PhoneNumber(string phoneNumber)
         {
-            if (!Regex.IsMatch(phoneNumber, PhoneNumberPattern))
+            if (!PhoneNumberRegex().IsMatch(phoneNumber))
             {
                 throw new InvalidPhoneNumberFormatException(phoneNumber);
             }
@@ -23,5 +24,7 @@ namespace PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.ValueObjects
 
         public static implicit operator string(PhoneNumber phoneNumber) => phoneNumber.Value;
         public static implicit operator PhoneNumber(string phoneNumber) => new PhoneNumber(phoneNumber);
+
+
     }
 }

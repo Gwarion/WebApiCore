@@ -1,4 +1,4 @@
-﻿using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
+﻿using PlaceHolder.DependencyInjection.Exceptions;
 
 namespace PlaceHolder.DependencyInjection.Options
 {

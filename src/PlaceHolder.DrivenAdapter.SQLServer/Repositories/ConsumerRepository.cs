@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
-using PlaceHolder.Domain.Model.Shared.Exceptions;
+using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.Exceptions;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Contexts;
 using PlaceHolder.DrivenAdapter.SQLServer.EFCore.Entities;
 using System;
@@ -42,7 +42,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.Repositories
                 .Include(c => c.Address)
                 .SingleOrDefaultAsync(c => c.Guid == guid);
 
-            if (consumer is null) throw new NotFoundException(guid);
+            if (consumer is null) throw new ConsumerNotFoundException(guid);
 
             return _mapper.Map<ConsumerEntity, Consumer>(consumer);
         }

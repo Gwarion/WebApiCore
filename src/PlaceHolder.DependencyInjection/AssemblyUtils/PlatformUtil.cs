@@ -7,35 +7,35 @@ namespace PlaceHolder.DependencyInjection.AssemblyUtils
     {
         public static readonly string[] NativeLibraryExtensions;
         public static readonly string[] NativeLibraryPrefixes;
-        public static readonly string[] ManagedAssemblyExtensions = new[]
-        {
+        public static readonly string[] ManagedAssemblyExtensions =
+        [
             ".dll",
             ".ni.dll",
             ".exe",
             ".ni.exe"
-        };
+        ];
 
         static PlatformUtil()
         {
             if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                NativeLibraryPrefixes = new[] { "" };
-                NativeLibraryExtensions = new[] { ".dll" };
+                NativeLibraryPrefixes = [""];
+                NativeLibraryExtensions = [".dll"];
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                NativeLibraryPrefixes = new[] { "", "lib" };
-                NativeLibraryExtensions = new[] { ".dylib" };
+                NativeLibraryPrefixes = ["", "lib"];
+                NativeLibraryExtensions = [".dylib"];
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                NativeLibraryPrefixes = new[] { "", "lib" };
-                NativeLibraryExtensions = new[] { ".so", ".so.1" };
+                NativeLibraryPrefixes = ["", "lib"];
+                NativeLibraryExtensions = [".so", ".so.1"];
             }
             else
             {
-                NativeLibraryPrefixes = Array.Empty<string>();
-                NativeLibraryExtensions = Array.Empty<string>();
+                NativeLibraryPrefixes = [];
+                NativeLibraryExtensions = [];
             }
         }
 

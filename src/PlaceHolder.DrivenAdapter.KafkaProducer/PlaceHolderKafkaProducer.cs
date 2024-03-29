@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using PlaceHolder.Application.Services.Ports.Kafka;
 using PlaceHolder.DependencyInjection.Options;
 using PlaceHolder.Domain.SeedWork.Kafka;
-using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
+using PlaceHolder.DrivenAdapter.KafkaProducer.Exceptions;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace PlaceHolder.DrivenAdapter.KafkaProducer
         private readonly ProducerConfig _producerConfig;
 
         public PlaceHolderKafkaProducer(KafkaProducerOptions options)
-            => _producerConfig = new(){ BootstrapServers = options.BootStrapServers };
+            => _producerConfig = new() { BootstrapServers = options.BootStrapServers };
 
         public async Task ProduceAsync(DomainEvent domainEvent)
         {

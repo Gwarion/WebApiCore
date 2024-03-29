@@ -4,16 +4,18 @@ using System.Text.RegularExpressions;
 
 namespace PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.ValueObjects
 {
-    public class Email : ValueObject
-    {        
-        private const string MailPattern = @"^[\w\.\-_]+@[\w\-_]+.\w+$";
+    public partial class Email : ValueObject
+    {
+        [GeneratedRegex(@"^[\w\.\-_]+@[\w\-_]+.\w+$")]
+        private static partial Regex MailRegex();
 
-        private string _email;
+        private readonly string _email;
+
         public override string Value => _email;
         
         public Email(string email)
         {
-            if(!Regex.IsMatch(email, MailPattern))
+            if(!MailRegex().IsMatch(email))
             {
                 throw new InvalidEmailFormatException(email);
             }
@@ -21,6 +23,8 @@ namespace PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate.ValueObjects
         }
 
         public static implicit operator string(Email email) => email.Value;
-        public static implicit operator Email(string email) => new Email(email);
+        public static implicit operator Email(string email) => new(email);
+
+
     }
 }

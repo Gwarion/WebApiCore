@@ -1,11 +1,13 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PlaceHolder.Domain.Model.Shared.Exceptions;
-using PlaceHolder.Utils.Exceptions;
-using PlaceHolder.Utils.Exceptions.TechnicalExceptions;
+using PlaceHolder.Domain.SeedWork.Exceptions.Base;
+using PlaceHolder.Utils;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PlaceHolder.API.Middlewares
@@ -14,6 +16,8 @@ namespace PlaceHolder.API.Middlewares
     {
         private const string DefaultContentType = "application/json";
         private const string DefaultLoggerCategoryName = "PlaceHolder";
+
+        private static readonly string _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         private readonly RequestDelegate _next;
         private readonly ILogger _logger;
@@ -31,88 +35,33 @@ namespace PlaceHolder.API.Middlewares
             {
                 await _next(httpContext);
             }
-            catch (Exception e)
+            catch (BaseException be)
             {
-                _logger.LogError(message: e.Message);
-
-                ErrorResponse errorResponse = e switch
-                {
-                    DomainException => await HandleDomainExceptionAsync(e),
-                    TechnicalException => await HandleTechnicalExceptionAsync(e),
-                    _ => await HandleExceptionAsync(e)
-                };
-
-                httpContext.Response.ContentType = DefaultContentType;
-                httpContext.Response.StatusCode = (int)errorResponse.StatusCode;
-
-                await httpContext.Response.WriteAsync(errorResponse.ToString());
+                await HandleExceptionAsync(httpContext, be.StatusCode, be.Message, be.StackTrace);
+            }
+            catch(Exception e)
+            {
+                await HandleExceptionAsync(httpContext, HttpStatusCode.InternalServerError, "An unmanaged exception occured.", e.StackTrace);
             }
         }
 
-        private static Task<ErrorResponse> HandleDomainExceptionAsync(Exception exception)
+        private async Task HandleExceptionAsync(
+            HttpContext context, 
+            HttpStatusCode statusCode,
+            string message, 
+            string stackTrace)
         {
-            var errorResponse = new ErrorResponse { Success = false };
+            _logger.LogError(message);
 
-            switch (exception)
+            ErrorResponse errorResponse = new(statusCode);
+
+            if (_environment.In(Environments.Development, Environments.Staging))
             {
-                case NotFoundException:
-                    errorResponse.StatusCode = HttpStatusCode.NotFound;
-                    errorResponse.Message = ExceptionMessages.NotFoundExceptionMessage;
-                    break;
-                case KafkaProducerException:
-                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    errorResponse.Message = ExceptionMessages.KafkaProducerExceptionMessage;
-                    break;
-                default:
-                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;
-                    break;
+                errorResponse.EnrichMessage(message);
+                errorResponse.EnrichStackTrace(stackTrace);
             }
 
-            return Task.FromResult(errorResponse);
-        }
-
-        private static Task<ErrorResponse> HandleTechnicalExceptionAsync(Exception exception)
-        {
-            var errorResponse = new ErrorResponse { Success = false };
-
-            switch (exception)
-            {
-                case ConfigurationException:
-                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    errorResponse.Message = ExceptionMessages.InvalidConfigurationExceptionMessage;
-                    break;
-
-                default:
-                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;
-                    break;
-            }
-
-            return Task.FromResult(errorResponse);
-        }
-
-        private static Task<ErrorResponse> HandleExceptionAsync(Exception exception)
-        {
-            var errorResponse = new ErrorResponse { Success = false };
-
-            switch (exception)
-            {
-                case NotImplementedException _:
-                    errorResponse.StatusCode = HttpStatusCode.NotImplemented;
-                    errorResponse.Message = ExceptionMessages.NotImplementedExceptionMessage;
-                    break;
-                case ValidationException _:
-                    errorResponse.StatusCode = HttpStatusCode.BadRequest;
-                    errorResponse.Message = $"{ExceptionMessages.ValueObjectValidationExceptionMessage} : {exception.Message}";
-                    break;
-                default:
-                    errorResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    errorResponse.Message = ExceptionMessages.InternalServerExceptionMessage;
-                    break;
-            }
-
-            return Task.FromResult(errorResponse);
+            await context.Response.WriteAsync(errorResponse.ToString());
         }
     }
 }

@@ -63,7 +63,7 @@ namespace PlaceHolder.DependencyInjection.AssemblyUtils
 
                 var result = typeof(AssemblyLoadContext)
                     .GetMethod("LoadUnmanagedDllFromPath", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .Invoke(loadContext, new object[] { unmanagedAssemblyPath });
+                    .Invoke(loadContext, [unmanagedAssemblyPath]);
 
                 intPtr = (IntPtr)result;
 

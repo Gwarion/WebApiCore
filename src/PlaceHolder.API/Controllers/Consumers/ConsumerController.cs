@@ -18,9 +18,8 @@ namespace PlaceHolder.API.Controllers.Consumers
     {
         private readonly IConsumerQueryRepository _queryRepository;
 
-        public ConsumerController(IMediator mediator, IMapper mapper, IConsumerQueryRepository queryRepository) 
-            : base(mediator, mapper) 
-                => _queryRepository = queryRepository;
+        public ConsumerController(IMediator mediator, IMapper mapper, IConsumerQueryRepository queryRepository) : base(mediator, mapper) 
+            => _queryRepository = queryRepository;
 
         [HttpPost(Name = "CreateConsumer")]
         [ProducesResponseType(typeof(ConsumerDto), StatusCodes.Status201Created)]
@@ -29,7 +28,7 @@ namespace PlaceHolder.API.Controllers.Consumers
         public async Task<IActionResult> CreateConsumer([FromBody] ConsumerResource resource)
         {
             var command = _mapper.Map<ConsumerResource, CreateConsumerCommand>(resource);
-            var consumerId  = await _mediator.Send(command);
+            var consumerId = await _mediator.Send(command);
 
             return new CreatedResult(string.Empty, await _queryRepository.GetOneByIdAsync(consumerId));
         }

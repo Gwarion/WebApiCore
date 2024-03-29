@@ -64,9 +64,9 @@ namespace PlaceHolder.DependencyInjection
 
         public static IServiceCollection AddBackgroundService(this IServiceCollection services)
         {
-            services.AddSingleton<BackgroundRequestQueueManager>();
             services.AddSingleton<IAsyncCommandDispatcher, AsyncCommandDispatcher>();
-            services.AddHostedService<BackgroundRequestService>();
+            services.AddSingleton<BackgroundRequestQueueManager>();
+            services.AddHostedService<BackgroundRequestService>();                        
 
             return services;
         }

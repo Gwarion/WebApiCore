@@ -25,7 +25,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\PlaceHolder.Application.Services\PlaceHolder.Application.Services.csproj" />
-		<ProjectReference Include="..\PlaceHolder.Utils\PlaceHolder.Utils.csproj" />
 	</ItemGroup>
-
+	
 </Project>

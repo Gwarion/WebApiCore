@@ -19,7 +19,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\PlaceHolder.DependencyInjection\PlaceHolder.DependencyInjection.csproj" />
-		<ProjectReference Include="..\PlaceHolder.Utils\PlaceHolder.Utils.csproj" />
 	</ItemGroup>
 
 </Project>
