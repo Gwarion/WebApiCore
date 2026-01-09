@@ -40,7 +40,7 @@ builder.Services.AddOpenApiDocument(config =>
     config.PostProcess = document =>
     {
         document.Info.Version = "v1";
-        document.Info.Title = ".NET Core 8.0 WebApi";
+        document.Info.Title = ".NET Core 10.0 WebApi";
         document.Info.Description = "Uses : CQRS (Mediatr pipeline), Hexagonal Architecture and DDD";
         document.Info.Contact = new NSwag.OpenApiContact
         {
@@ -50,8 +50,9 @@ builder.Services.AddOpenApiDocument(config =>
     };
 });
 
+
 builder.Services.AddApplicationCore();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(cfg => cfg.LicenseKey = "", typeof(Program).Assembly);
 builder.Services.AddAdapters(builder.Configuration);
 builder.Services.AddBackgroundService();
 
@@ -66,27 +67,16 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-app.UseHttpsRedirection();
-
-app.UseRouting();
-
-app.UseAuthorization();
+app.UseMiddleware<ExceptionHandlingMiddleware>()
+    .UseHttpsRedirection()
+    .UseRouting()
+    .UseAuthorization()
+    .UseOpenApi()
+    .UseSwaggerUi(config =>
+    {
+        config.EnableTryItOut = true;
+    });
 
 app.MapControllers();
-
-app.UseOpenApi().UseSwaggerUi(config =>
-{
-    config.EnableTryItOut = true;
-});
-
-/*
-Apply DB Migrations
-*/
 app.MigrateDatabase();
-
-/*
-Ready to run
-*/
 app.Run();
