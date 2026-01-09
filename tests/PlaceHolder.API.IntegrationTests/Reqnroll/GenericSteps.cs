@@ -1,7 +1,5 @@
-﻿using BoDi;
-using PlaceHolder.API.IntegrationTests.Utils;
+﻿using PlaceHolder.API.IntegrationTests.Utils;
 using System.Net;
-using TechTalk.SpecFlow.Assist;
 
 namespace PlaceHolder.API.IntegrationTests.SpecFlow
 {

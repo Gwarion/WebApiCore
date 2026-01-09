@@ -1,5 +1,4 @@
-﻿using BoDi;
-using PlaceHolder.API.Controllers.Consumers.Resources;
+﻿using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.API.IntegrationTests.Utils;
 using PlaceHolder.QueryModel.Consumers;
 
