@@ -1,6 +1,4 @@
-﻿using TechTalk.SpecFlow.Assist;
-
-namespace PlaceHolder.API.IntegrationTests.SpecFlow.Retrievers
+﻿namespace PlaceHolder.API.IntegrationTests.SpecFlow.Retrievers
 {
     public class HttpMethodValueRetriever : IValueRetriever
     {

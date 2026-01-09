@@ -1,7 +1,5 @@
-﻿using BoDi;
-using PlaceHolder.API.IntegrationTests.SpecFlow.Retrievers;
+﻿using PlaceHolder.API.IntegrationTests.SpecFlow.Retrievers;
 using PlaceHolder.API.IntegrationTests.Utils;
-using TechTalk.SpecFlow.Assist;
 
 namespace PlaceHolder.API.IntegrationTests.Hooks
 {
