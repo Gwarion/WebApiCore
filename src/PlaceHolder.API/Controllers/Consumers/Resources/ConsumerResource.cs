@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PlaceHolder.API.Controllers.Consumers.Resources
+﻿namespace PlaceHolder.API.Controllers.Consumers.Resources
 {
     public class ConsumerResource
     {

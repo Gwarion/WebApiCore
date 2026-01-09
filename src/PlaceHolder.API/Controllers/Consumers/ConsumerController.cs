@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.Application.Logic.Commands.Consumers;
-using PlaceHolder.Domain.Model.Aggregates.ConsumerAggregate;
 using PlaceHolder.QueryModel.Consumers;
 using System;
 using System.Net.Mime;

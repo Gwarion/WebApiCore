@@ -1,13 +1,10 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PlaceHolder.Domain.Model.Shared.Exceptions;
 using PlaceHolder.Domain.SeedWork.Exceptions.Base;
 using PlaceHolder.Utils;
 using System;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PlaceHolder.API.Middlewares

@@ -39,7 +39,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer
             });
             services.AddScoped<IDbContext, PlaceHolderContext>();
 
-            services.AddAutoMapper(GetType().Assembly);
+            services.AddAutoMapper(cfg => cfg.LicenseKey = "", GetType().Assembly);
 
             services.TryAddTransient<IConsumerRepository, ConsumerRepository>();
 
