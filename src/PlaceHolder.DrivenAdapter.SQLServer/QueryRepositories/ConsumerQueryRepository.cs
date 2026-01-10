@@ -7,13 +7,14 @@ using PlaceHolder.QueryModel.Consumers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PlaceHolder.DrivenAdapter.SQLServer.QueryRepositories
 {
     internal class ConsumerQueryRepository : AbstractQueryRepository, IConsumerQueryRepository
     {
-        private const int MaxTotalRecords = 5_000_000;        
+        private const int MaxTotalRecords = 5_000_000;
 
         public ConsumerQueryRepository(PlaceHolderContext context, IMapper mapper)
             : base(context, mapper) { }
@@ -39,7 +40,7 @@ namespace PlaceHolder.DrivenAdapter.SQLServer.QueryRepositories
             return _mapper.Map<List<ConsumerDto>>(consumers);
         }
 
-        public async Task<IEnumerable<ConsumerDto>> GetAllAsync(int startId, int chunkSize)
+        public async Task<IEnumerable<ConsumerDto>> GetAllAsync(int startId, int chunkSize, CancellationToken token)
         {
             await Task.Delay(100);
 
