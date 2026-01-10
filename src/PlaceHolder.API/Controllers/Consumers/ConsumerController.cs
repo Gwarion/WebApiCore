@@ -6,6 +6,8 @@ using PlaceHolder.API.Controllers.Consumers.Resources;
 using PlaceHolder.Application.Logic.Commands.Consumers;
 using PlaceHolder.QueryModel.Consumers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
@@ -17,7 +19,7 @@ namespace PlaceHolder.API.Controllers.Consumers
     {
         private readonly IConsumerQueryRepository _queryRepository;
 
-        public ConsumerController(IMediator mediator, IMapper mapper, IConsumerQueryRepository queryRepository) : base(mediator, mapper) 
+        public ConsumerController(IMediator mediator, IMapper mapper, IConsumerQueryRepository queryRepository) : base(mediator, mapper)
             => _queryRepository = queryRepository;
 
         [HttpPost(Name = "CreateConsumer")]
@@ -61,6 +63,31 @@ namespace PlaceHolder.API.Controllers.Consumers
         public async Task<IActionResult> GetAllConsumer([FromQuery] int limit = 10)
         {
             return Ok(await _queryRepository.GetAllAsync(limit));
+        }
+
+        [HttpGet("data-stream", Name = "GetAllStreamedConsumer")]
+        [ProducesResponseType(typeof(ConsumerResource), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+        public async IAsyncEnumerable<ConsumerDto> GetAllStreamedConsumer()
+        {
+            const int chunkSize = 10000;
+            int startId = 0;
+
+            while (true)
+            {
+                var chunk = await _queryRepository.GetAllAsync(startId, chunkSize);
+
+                if (!chunk.Any())
+                    break;
+
+                foreach (var record in chunk)
+                {
+                    yield return record;
+                    await Task.Delay(1);
+                }
+
+                startId += chunkSize;
+            }
         }
     }
 }

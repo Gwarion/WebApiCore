@@ -4,5 +4,6 @@
     {
         Task<ConsumerDto> GetOneByIdAsync(Guid guid);
         Task<List<ConsumerDto>> GetAllAsync(int limit = 10);
+        Task<IEnumerable<ConsumerDto>> GetAllAsync(int startId, int chunkSize);
     }
 }
