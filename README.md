@@ -20,12 +20,15 @@ This is a proof of concept for a .NET 10 Api using
 
 # To Start the WebApi
 
-### Using Docker
+### Install Docker
 * Install the latest version of [Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
-* Install the [update package  WSL2 for x64 machines](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
+* If needed, install the [update package  WSL2 for x64 machines](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
+* If needed,  [enable virtualization on windows](https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1)
+  
+### Run Docker (from VS)
 * Set docker-compose as startup project
-* Build the solution and run Docker Compose
-* Wait for images to load (first time will be super long)
+* Build the solution and run docker-compose
+* Wait docker to download the images
 * API is running on `localhost:55000`
 * Kafka (lenses.io) is running on `localhost:3030` (you can observe ConsumerCreated and ConsumerUpdated events in the Consumer topic after executing the related request)
 * SQL Server is running on `localhost, 1433` - logins are set in the docker-compose.yml file. It uses the default System Database "master"
