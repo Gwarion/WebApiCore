@@ -1,6 +1,6 @@
 # About this repo
 
-This is a proof of concept for a .NET 8 Api using 
+This is a proof of concept for a .NET 10 Api using 
 
 ### Architecture
 
@@ -12,9 +12,11 @@ This is a proof of concept for a .NET 8 Api using
 
 ### FrameWorks and Tools
 
-- Mediatr, AutoMapper, SpecFlow (xUnit)
+- Mediatr, AutoMapper, Reqnroll (xUnit)
 - A Background Service to dispatch asynchronous commands
-- An Exception Handling Middleware
+- Middleware implementation
+- Api Versionning
+- Open Api documentation
 
 # To Start the WebApi
 
@@ -22,7 +24,7 @@ This is a proof of concept for a .NET 8 Api using
 * Install the latest version of [Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
 * Install the [update package  WSL2 for x64 machines](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 * Set docker-compose as startup project
-* Rebuild and run Docker Compose
+* Build the solution and run Docker Compose
 * Wait for images to load (first time will be super long)
 * API is running on `localhost:55000`
 * Kafka (lenses.io) is running on `localhost:3030` (you can observe ConsumerCreated and ConsumerUpdated events in the Consumer topic after executing the related request)
